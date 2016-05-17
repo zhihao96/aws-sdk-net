@@ -1,8 +1,9 @@
-# AWS SDK for .NET [![Build Status](https://travis-ci.org/aws/aws-sdk-net.png?branch=master)](https://travis-ci.org/aws/aws-sdk-net)
-
 ## Retired Branch
 
 Since DNX has been removed in favor of the new dotnet CLI tooling this branch has been retired and will be a snapshot of the RC1 support. Development for CoreCLR has been moved to the netcore-development branch.
+
+
+# AWS SDK for .NET [![Build Status](https://travis-ci.org/aws/aws-sdk-net.png?branch=master)](https://travis-ci.org/aws/aws-sdk-net)
 
 
 The **AWS SDK for .NET** enables .NET developers to easily work with [Amazon Web Services][aws] and build scalable solutions with Amazon S3, Amazon DynamoDB, Amazon Glacier, and more.
