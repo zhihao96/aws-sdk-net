@@ -78,6 +78,10 @@ namespace Amazon.Runtime
             RoleArn = roleArn;
             RoleSessionName = roleSessionName;
             Options = options;
+
+            // Make sure to fetch new credentials well before the current credentials expire to avoid
+            // any request being made with expired credentials.
+            PreemptExpiryTime = TimeSpan.FromMinutes(5);
         }
 
         protected override CredentialsRefreshState GenerateNewCredentials()
