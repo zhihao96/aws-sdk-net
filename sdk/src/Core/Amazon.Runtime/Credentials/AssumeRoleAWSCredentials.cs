@@ -29,6 +29,8 @@ namespace Amazon.Runtime
     {
         private RegionEndpoint DefaultSTSClientRegion = RegionEndpoint.USEast1;
 
+        private static Logger _logger = Logger.GetLogger(typeof(AssumeRoleAWSCredentials));
+
         /// <summary>
         /// The credentials of the user that will be used to call AssumeRole.
         /// </summary>
@@ -115,6 +117,7 @@ namespace Amazon.Runtime
             }
 
             var credentials = coreSTSClient.CredentialsFromAssumeRoleAuthentication(RoleArn, RoleSessionName, Options);
+            _logger.InfoFormat("New credentials created for assume role that expire at {0}", credentials.Expiration.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK"));
             return new CredentialsRefreshState(credentials, credentials.Expiration);
         }
     }

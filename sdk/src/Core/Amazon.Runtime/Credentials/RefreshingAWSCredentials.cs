@@ -24,6 +24,8 @@ namespace Amazon.Runtime
     /// </summary>
     public abstract class RefreshingAWSCredentials : AWSCredentials
     {
+        private static Logger _logger = Logger.GetLogger(typeof(AssumeRoleAWSCredentials));
+
         #region Refresh data
 
         /// <summary>
@@ -177,7 +179,16 @@ namespace Amazon.Runtime
                 // have the PreemptExpiryTime baked into to the expiration from a call to 
                 // UpdateToGeneratedCredentials but it may not if this is new application 
                 // load.
-                return currentState.IsExpiredWithin(TimeSpan.Zero);
+                var isExpired = currentState.IsExpiredWithin(TimeSpan.Zero);
+                if(isExpired)
+                {
+#pragma warning disable CS0612 // Type or member is obsolete
+                    _logger.InfoFormat("Determined refreshing credentials should update. Expiration time: {0}, Current time: {1}", 
+                        currentState.Expiration.Add(this.PreemptExpiryTime).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffffffK"), 
+                        AWSSDKUtils.CorrectedUtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK"));
+#pragma warning restore CS0612 // Type or member is obsolete
+                }
+                return isExpired;
             }
         }
 
