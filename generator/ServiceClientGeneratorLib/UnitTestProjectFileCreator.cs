@@ -69,7 +69,8 @@ namespace ServiceClientGenerator
                     PackageReferences      = configuration.PackageReferences,
                     SupressWarnings        = configuration.NoWarn,
                     OutputPathOverride     = configuration.OutputPathOverride,
-                    SignBinaries           = false
+                    SignBinaries           = false,
+                    FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset"
                 };
                 if (_isLegacyProj)
                 {

@@ -121,5 +121,7 @@ namespace ServiceClientGenerator
         /// Used to generate the OutputPath element of the project file
         /// </summary>
         public string BinSubfolder { get; set; }
+
+        public string FxcopAnalyzerRuleSetDirectory { get; set; }
     }
 }

@@ -19,6 +19,11 @@
     <!-- workaround per https://github.com/Microsoft/msbuild/issues/1333 -->
     <FrameworkPathOverride>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <Choose>
     <When Condition=" '$(AWSKeyFile)' == '' ">
       <PropertyGroup>
@@ -54,6 +59,16 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Services\SecurityToken\AWSSDK.SecurityToken.Net35.csproj"/>
     <ProjectReference Include="..\..\Core\AWSSDK.Core.Net35.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
+        <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

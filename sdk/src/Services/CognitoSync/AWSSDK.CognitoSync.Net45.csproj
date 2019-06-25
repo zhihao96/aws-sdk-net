@@ -17,6 +17,11 @@
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
 
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <Choose>
     <When Condition=" '$(AWSKeyFile)' == '' ">
       <PropertyGroup>
@@ -53,7 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite" Version="1.0.97.0"/>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.97.0">
+            
+    </PackageReference>    
   </ItemGroup>
 
   <ItemGroup>

@@ -11,6 +11,19 @@
             "frameworkReferences" : [
                 {"name": "System.Configuration"},
                 {"name": "System.Data.Entity", "hintPath" : "C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\v3.5\\System.Data.Entity.dll"}
+            ],
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
             ]
         },
         {
@@ -22,6 +35,19 @@
             "nugetTargetPlatform": "net45",
             "frameworkReferences" : [
                 {"name": "System.Configuration"}
+            ],
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
             ]
         },
         {
@@ -48,6 +74,19 @@
                 "test\\CrossPlatformTests\\XFormsPortableTests\\XFormsPortableTests.Droid\\XFormsPortableTests.Droid.csproj",
                 "test\\CrossPlatformTests\\XFormsPortableTests\\XFormsPortableTests.iOS\\XFormsPortableTests.iOS.csproj",
                 "test\\CrossPlatformTests\\XFormsPortableTests\\XFormsPortableTests.WinPhone\\XFormsPortableTests.WinPhone.csproj"
+            ],
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
             ]
         },
         {
@@ -59,7 +98,20 @@
             "template": "AndroidProjectFile",
             "platformCodeFolders": [ "_pcl", "_async", "_mobile", "_android", "_pcl-sl", "_bcl+pcl", "_bcl45+pcl", "_bcl+netstandard+pcl", "_bcl45+netstandard+pcl"  ],
             "parentProfile": "PCL",
-            "nugetTargetPlatform": "MonoAndroid10"
+            "nugetTargetPlatform": "MonoAndroid10",
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "iOS",
@@ -70,7 +122,20 @@
             "template": "IOSProjectFile",
             "platformCodeFolders": [ "_pcl", "_async", "_mobile", "_ios", "_pcl-sl", "_bcl+pcl", "_bcl45+pcl", "_bcl+netstandard+pcl", "_bcl45+netstandard+pcl"  ],
             "parentProfile": "PCL",
-            "nugetTargetPlatform": "xamarinios10"
+            "nugetTargetPlatform": "xamarinios10",
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "Win8",
@@ -81,7 +146,20 @@
             "template": "Win8ProjectFile",
             "platformCodeFolders": [ "_pcl", "_async", "_mobile", "_win8", "_pcl-sl", "_bcl+pcl", "_bcl45+pcl", "_bcl+netstandard+pcl", "_bcl45+netstandard+pcl"  ],
             "parentProfile": "PCL",
-            "nugetTargetPlatform": "win8"
+            "nugetTargetPlatform": "win8",
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "WinPhone81",
@@ -92,7 +170,20 @@
             "template": "WinPhone81ProjectFile",
             "platformCodeFolders": [ "_pcl", "_async", "_mobile", "_winPhone81", "_pcl-sl", "_bcl+pcl", "_bcl45+pcl", "_bcl+netstandard+pcl", "_bcl45+netstandard+pcl" ],
             "parentProfile": "PCL",
-            "nugetTargetPlatform": "wpa81"
+            "nugetTargetPlatform": "wpa81",
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "WinPhoneSilverlight8",
@@ -103,7 +194,20 @@
             "template": "WinPhoneSilverlight8ProjectFile",
             "platformCodeFolders": [ "_pcl", "_async", "_mobile", "_winPhoneSilverlight8", "_bcl+sl", "_bcl+pcl", "_bcl45+pcl", "_bcl+netstandard+pcl", "_bcl45+netstandard+pcl" ],
             "parentProfile": "PCL",
-            "nugetTargetPlatform": "wp8"
+            "nugetTargetPlatform": "wp8",
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "Unity",
@@ -112,7 +216,20 @@
             "defineConstants": [ ],
             "binSubFolder": "unity",
             "template": "UnityProjectFile",
-            "platformCodeFolders": [ "_unity", "_bcl+unity" ]
+            "platformCodeFolders": [ "_unity", "_bcl+unity" ],
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         },
         {
             "name": "NetStandard",
@@ -121,7 +238,20 @@
             "template": "VS2017ProjectFile",
             "binSubFolder" : "",
             "configurations" : [],
-            "excludeFolders": ["_pcl", "_pcl-sl", "_bcl35", "_bcl45", "_bcl", "_bcl+sl", "_bcl+unity", "_unity", "_android", "_ios", "_pclReference", "_win8", "_winPhone81", "_winPhoneSilverlight8", "_winstorage", "Custom/SyncManager", "obj"]
+            "excludeFolders": ["_pcl", "_pcl-sl", "_bcl35", "_bcl45", "_bcl", "_bcl+sl", "_bcl+unity", "_unity", "_android", "_ios", "_pclReference", "_win8", "_winPhone81", "_winPhoneSilverlight8", "_winstorage", "Custom/SyncManager", "obj"],
+            "packageReferences": [
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
+                }
+            ]
         }        
     ],
     "unittestprojects":[
@@ -161,6 +291,17 @@
                 {
                     "include": "AutoFixture.AutoMoq",
                     "version": "3.51.0"
+                },
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
                 }
             ],
             "frameworkReferences" : [
@@ -207,6 +348,17 @@
                 {
                     "include": "AutoFixture.AutoMoq",
                     "version": "3.51.0"
+                },
+                {
+                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
+                    "version": "2.9.3",
+                    "privateAssets": "all"
+                },
+                {
+                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
+                    "version": "0.2.12-alpha",
+                    "privateAssets": "all",
+                    "includeAssets": "runtime; build; native; contentfiles; analyzers"
                 }
             ],
             "frameworkReferences" : [

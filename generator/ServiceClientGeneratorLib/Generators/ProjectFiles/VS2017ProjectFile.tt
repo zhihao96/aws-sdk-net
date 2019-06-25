@@ -81,6 +81,11 @@
     }    
 #>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetDirectory#></CodeAnalysisRuleSet>
+  </PropertyGroup>
+
 <#
     if (this.Project.SignBinaries)
     {
@@ -169,8 +174,29 @@
         foreach(var package in this.Project.PackageReferences)
         {
 #>
-    <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>"/>
+    <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>">
 <#
+			if(package.PrivateAssets != "" && package.PrivateAssets != "none")
+			{
+#>
+		<PrivateAssets><#=package.PrivateAssets#></PrivateAssets>
+<# 
+				if(package.IncludeAssets != "")
+				{
+#>
+		<IncludeAssets><#=package.IncludeAssets #></IncludeAssets>
+<#
+				}
+#>
+	</PackageReference>
+<#
+			}
+			else
+			{
+#>			
+	</PackageReference>	
+<#
+			}
         }
 #>
   </ItemGroup>

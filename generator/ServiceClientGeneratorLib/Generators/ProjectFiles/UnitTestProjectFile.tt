@@ -24,6 +24,11 @@
     <TargetFrameworkProfile />
     <ReferenceServiceDLLs Condition="'$(ReferenceServiceDLLs)'==''">false</ReferenceServiceDLLs>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>"..\..\..\..\AWSDotNetSDK.ruleset"</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

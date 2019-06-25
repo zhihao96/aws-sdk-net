@@ -24,6 +24,10 @@
     <NetStandardImplicitPackageVersion Condition="'$(TargetFramework)' == 'netstandard2.0'">2.0.0</NetStandardImplicitPackageVersion>
   </PropertyGroup>
   
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
   <Choose>
     <When Condition=" '$(AWSKeyFile)' == '' ">
       <PropertyGroup>
@@ -61,6 +65,16 @@
     <EmbeddedResource Include="endpoints.json">
         <LogicalName>Core.endpoints.json</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+
+<ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
+        <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
