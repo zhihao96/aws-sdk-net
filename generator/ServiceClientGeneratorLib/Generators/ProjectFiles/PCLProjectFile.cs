@@ -419,35 +419,9 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             
             #line default
             #line hidden
-            this.Write("</PrivateAssets>\r\n");
+            this.Write("</PrivateAssets>\r\n\t</PackageReference>\r\n");
             
-            #line 167 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
- 
-				if(package.IncludeAssets != "")
-				{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\t<IncludeAssets>");
-            
-            #line 171 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(package.IncludeAssets));
-            
-            #line default
-            #line hidden
-            this.Write("</IncludeAssets>\r\n");
-            
-            #line 172 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
-
-				}
-
-            
-            #line default
-            #line hidden
-            this.Write("\t</PackageReference>\r\n");
-            
-            #line 176 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 168 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 			}
 			else
@@ -458,7 +432,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t\t\t\r\n\t</PackageReference>\t\r\n");
             
-            #line 182 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 174 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 			}
         }
@@ -468,7 +442,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </ItemGroup>\r\n");
             
-            #line 187 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 179 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 	}
 
@@ -490,7 +464,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     <Reference Include=""System.Xml"" />
 ");
             
-            #line 203 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 195 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 	if(this.Project.AssemblyName == "AWSSDK.Core")
 	{
@@ -500,7 +474,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t<Reference Include=\"System.Net.Http\">\r\n      <HintPath>");
             
-            #line 208 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 200 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -509,7 +483,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "dll</HintPath>\r\n    </Reference>\r\n    <Reference Include=\"System.Net.Http.Extens" +
                     "ions\">\r\n      <HintPath>");
             
-            #line 211 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 203 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -518,7 +492,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "Extensions.dll</HintPath>\r\n    </Reference>\r\n    <Reference Include=\"System.Net." +
                     "Http.Primitives\">\r\n      <HintPath>");
             
-            #line 214 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 206 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -526,7 +500,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("Microsoft.Net.Http.2.2.29\\lib\\portable-net40+sl4+win8+wp71+wpa81\\System.Net.Http." +
                     "Primitives.dll</HintPath>\r\n    </Reference>\r\n");
             
-            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 208 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 	}
 
@@ -535,7 +509,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t\r\n    <Reference Include=\"PCLCrypto\">\r\n      <HintPath>");
             
-            #line 221 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 213 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -544,7 +518,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "nios10+MonoTouch10\\PCLCrypto.dll</HintPath>\r\n    </Reference>\r\n    <Reference In" +
                     "clude=\"PCLStorage\">\r\n      <HintPath>");
             
-            #line 224 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -553,7 +527,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "iOS+Xamarin.Mac\\PCLStorage.dll</HintPath>\r\n    </Reference>\r\n    <Reference Incl" +
                     "ude=\"PCLStorage.Abstractions\">\r\n      <HintPath>");
             
-            #line 227 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 219 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -561,7 +535,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("PCLStorage.1.0.2\\lib\\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin." +
                     "iOS+Xamarin.Mac\\PCLStorage.Abstractions.dll</HintPath>\r\n    </Reference>\r\n");
             
-            #line 229 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 221 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 	if(this.Project.ReferenceDependencies != null)
     {
@@ -573,27 +547,27 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("    <Reference Include=\"");
             
-            #line 235 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 227 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dependency.Name));
             
             #line default
             #line hidden
             this.Write("\">\r\n      <HintPath>");
             
-            #line 236 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 228 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
             #line hidden
             
-            #line 236 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 228 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dependency.HintPath));
             
             #line default
             #line hidden
             this.Write("</HintPath>\r\n      <Private>True</Private>\r\n    </Reference>\r\n");
             
-            #line 239 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 231 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
    
 		}
 	}
@@ -613,7 +587,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
   </Target>
   <Import Project=""");
             
-            #line 253 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 245 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -621,7 +595,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("Microsoft.Bcl.Build.1.0.14\\tools\\Microsoft.Bcl.Build.targets\" Condition=\"Exists(\'" +
                     "");
             
-            #line 253 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 245 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -630,7 +604,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "e=\"EnsureBclBuildImported\" BeforeTargets=\"BeforeBuild\" Condition=\"\'$(BclBuildImp" +
                     "orted)\' == \'\'\">\r\n    <Error Condition=\"!Exists(\'");
             
-            #line 255 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 247 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -638,7 +612,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write(@"Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')"" Text=""This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567."" HelpKeyword=""BCLBUILD2001"" />
     <Error Condition=""Exists('");
             
-            #line 256 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+            #line 248 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -658,7 +632,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 267 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
+        #line 259 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\PCLProjectFile.tt"
 
 	public Project Project { get; set; }
 

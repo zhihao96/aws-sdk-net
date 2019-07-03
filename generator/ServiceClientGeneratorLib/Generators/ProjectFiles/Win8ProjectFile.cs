@@ -418,35 +418,9 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             
             #line default
             #line hidden
-            this.Write("</PrivateAssets>\r\n");
+            this.Write("</PrivateAssets>\r\n\t</PackageReference>\r\n");
             
-            #line 166 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
- 
-				if(package.IncludeAssets != "")
-				{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\t<IncludeAssets>");
-            
-            #line 170 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(package.IncludeAssets));
-            
-            #line default
-            #line hidden
-            this.Write("</IncludeAssets>\r\n");
-            
-            #line 171 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
-
-				}
-
-            
-            #line default
-            #line hidden
-            this.Write("\t</PackageReference>\r\n");
-            
-            #line 175 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 167 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
 
 			}
 			else
@@ -457,7 +431,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t\t\t\r\n\t</PackageReference>\t\r\n");
             
-            #line 181 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 173 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
 
 			}
         }
@@ -467,7 +441,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </ItemGroup>\r\n");
             
-            #line 186 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 178 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
 
 	}
 
@@ -490,7 +464,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     <Reference Include=""PCLCrypto"">
       <HintPath>");
             
-            #line 203 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 195 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -499,7 +473,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "nios10+MonoTouch10\\PCLCrypto.dll</HintPath>\r\n    </Reference>\r\n    <Reference In" +
                     "clude=\"PCLStorage\">\r\n      <HintPath>");
             
-            #line 206 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 198 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -508,7 +482,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "iOS+Xamarin.Mac\\PCLStorage.dll</HintPath>\r\n    </Reference>\r\n    <Reference Incl" +
                     "ude=\"PCLStorage.Abstractions\">\r\n      <HintPath>");
             
-            #line 209 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+            #line 201 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -536,7 +510,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 230 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
+        #line 222 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
 
 	public Project Project { get; set; }
 

@@ -164,14 +164,6 @@
 			{
 #>
 		<PrivateAssets><#=package.PrivateAssets#></PrivateAssets>
-<# 
-				if(package.IncludeAssets != "")
-				{
-#>
-		<IncludeAssets><#=package.IncludeAssets #></IncludeAssets>
-<#
-				}
-#>
 	</PackageReference>
 <#
 			}

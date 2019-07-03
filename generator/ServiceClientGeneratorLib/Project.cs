@@ -122,6 +122,9 @@ namespace ServiceClientGenerator
         /// </summary>
         public string BinSubfolder { get; set; }
 
+        /// <summary>
+        /// Used to generate the RuleSet path of the project file
+        /// </summary>
         public string FxcopAnalyzerRuleSetDirectory { get; set; }
     }
 }

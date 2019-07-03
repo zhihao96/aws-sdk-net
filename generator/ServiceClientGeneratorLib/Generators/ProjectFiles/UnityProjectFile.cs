@@ -486,35 +486,9 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             
             #line default
             #line hidden
-            this.Write("</PrivateAssets>\r\n");
+            this.Write("</PrivateAssets>\r\n\t</PackageReference>\r\n");
             
-            #line 196 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
- 
-				if(package.IncludeAssets != "")
-				{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\t<IncludeAssets>");
-            
-            #line 200 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(package.IncludeAssets));
-            
-            #line default
-            #line hidden
-            this.Write("</IncludeAssets>\r\n");
-            
-            #line 201 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
-
-				}
-
-            
-            #line default
-            #line hidden
-            this.Write("\t</PackageReference>\r\n");
-            
-            #line 205 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
+            #line 197 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
 
 			}
 			else
@@ -525,7 +499,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t\t\t\r\n\t</PackageReference>\t\r\n");
             
-            #line 211 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
+            #line 203 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
 
 			}
         }
@@ -535,7 +509,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </ItemGroup>\r\n");
             
-            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
+            #line 208 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
 
 	}
 
@@ -562,7 +536,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 235 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
+        #line 227 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\UnityProjectFile.tt"
 
 	public Project Project { get; set; }
 

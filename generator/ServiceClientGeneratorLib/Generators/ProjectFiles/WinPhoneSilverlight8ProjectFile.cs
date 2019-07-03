@@ -422,35 +422,9 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             
             #line default
             #line hidden
-            this.Write("</PrivateAssets>\r\n");
+            this.Write("</PrivateAssets>\r\n\t</PackageReference>\r\n");
             
-            #line 179 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
- 
-				if(package.IncludeAssets != "")
-				{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\t<IncludeAssets>");
-            
-            #line 183 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(package.IncludeAssets));
-            
-            #line default
-            #line hidden
-            this.Write("</IncludeAssets>\r\n");
-            
-            #line 184 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
-
-				}
-
-            
-            #line default
-            #line hidden
-            this.Write("\t</PackageReference>\r\n");
-            
-            #line 188 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 180 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 			}
 			else
@@ -461,7 +435,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t\t\t\r\n\t</PackageReference>\t\r\n");
             
-            #line 194 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 186 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 			}
         }
@@ -471,7 +445,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </ItemGroup>\r\n");
             
-            #line 199 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 191 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 	}
 
@@ -482,7 +456,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "rties\\AssemblyInfo.cs\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n    <Service Include=\"" +
                     "{508349B6-6B84-4DF5-91F0-309BEEBAD82D}\" />\r\n  </ItemGroup>\r\n  <ItemGroup>\r\n");
             
-            #line 211 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 203 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 	if(this.Project.AssemblyName == "AWSSDK.Core")
 	{
@@ -492,7 +466,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("\t<Reference Include=\"System.Net.Http\">\r\n      <HintPath>");
             
-            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 208 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -501,7 +475,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "dll</HintPath>\r\n    </Reference>\r\n    <Reference Include=\"System.Net.Http.Extens" +
                     "ions\">\r\n      <HintPath>");
             
-            #line 219 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 211 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -510,7 +484,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "Extensions.dll</HintPath>\r\n    </Reference>\r\n    <Reference Include=\"System.Net." +
                     "Http.Primitives\">\r\n      <HintPath>");
             
-            #line 222 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 214 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -518,7 +492,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("Microsoft.Net.Http.2.2.29\\lib\\portable-net40+sl4+win8+wp71+wpa81\\System.Net.Http." +
                     "Primitives.dll</HintPath>\r\n    </Reference>\r\n");
             
-            #line 224 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 	}
 
@@ -527,7 +501,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("    <Reference Include=\"PCLCrypto\">\r\n      <HintPath>");
             
-            #line 228 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 220 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -536,7 +510,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "nios10+MonoTouch10\\PCLCrypto.dll</HintPath>\r\n    </Reference>\r\n    <Reference In" +
                     "clude=\"PCLStorage\">\r\n      <HintPath>");
             
-            #line 231 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 223 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -545,7 +519,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "iOS+Xamarin.Mac\\PCLStorage.dll</HintPath>\r\n    </Reference>\r\n    <Reference Incl" +
                     "ude=\"PCLStorage.Abstractions\">\r\n      <HintPath>");
             
-            #line 234 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 226 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -565,7 +539,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
   </Target>
   <Import Project=""");
             
-            #line 247 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 239 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -573,7 +547,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("Microsoft.Bcl.Build.1.0.14\\tools\\Microsoft.Bcl.Build.targets\" Condition=\"Exists(\'" +
                     "");
             
-            #line 247 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 239 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -582,7 +556,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "e=\"EnsureBclBuildImported\" BeforeTargets=\"BeforeBuild\" Condition=\"\'$(BclBuildImp" +
                     "orted)\' == \'\'\">\r\n    <Error Condition=\"!Exists(\'");
             
-            #line 249 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 241 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -590,7 +564,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write(@"Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')"" Text=""This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567."" HelpKeyword=""BCLBUILD2001"" />
     <Error Condition=""Exists('");
             
-            #line 250 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+            #line 242 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -610,7 +584,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 261 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
+        #line 253 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhoneSilverlight8ProjectFile.tt"
 
 	public Project Project { get; set; }
 
