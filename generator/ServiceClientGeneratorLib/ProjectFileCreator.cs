@@ -485,15 +485,7 @@ namespace ServiceClientGenerator
             public string Version { get; set; }
             public string PrivateAssets { get; set; } = "none";
             public string IncludeAssets { get; set; }
-
-            public Boolean HasPrivateAssets()
-            {
-                if (PrivateAssets != "" && PrivateAssets != "none")
-                {
-                    return true;
-                }
-                return false;
-            }
+            public bool HasPrivateAssets => PrivateAssets != "" && PrivateAssets != "none";
             public static PackageReference ParseJson(Json.LitJson.JsonData data)
             {
                 return new PackageReference

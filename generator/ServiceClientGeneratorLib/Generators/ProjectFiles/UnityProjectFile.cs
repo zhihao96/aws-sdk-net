@@ -451,7 +451,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
 
         foreach(var package in this.Project.PackageReferences)
         {
-          if(package.HasPrivateAssets())
+          if(package.HasPrivateAssets)
           {
 
             
