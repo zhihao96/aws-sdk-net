@@ -157,27 +157,25 @@
 <#
         foreach(var package in this.Project.PackageReferences)
         {
+          if(package.HasPrivateAssets())
+          {
 #>
     <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>">
+      <PrivateAssets><#=package.PrivateAssets#></PrivateAssets>
+    </PackageReference>
 <#
-			if(package.PrivateAssets != "" && package.PrivateAssets != "none")
-			{
+          }
+          else
+          {
 #>
-		<PrivateAssets><#=package.PrivateAssets#></PrivateAssets>
-	</PackageReference>
+	  <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>"/>
 <#
-			}
-			else
-			{
-#>			
-	</PackageReference>	
-<#
-			}
+		    	}
         }
 #>
   </ItemGroup>
 <#
-	}
+  	}
 #>
 
   <ItemGroup>

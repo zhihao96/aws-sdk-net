@@ -396,57 +396,63 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
 
         foreach(var package in this.Project.PackageReferences)
         {
+          if(package.HasPrivateAssets())
+          {
 
             
             #line default
             #line hidden
             this.Write("    <PackageReference Include=\"");
             
-            #line 170 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 172 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(package.Include));
             
             #line default
             #line hidden
             this.Write("\" Version=\"");
             
-            #line 170 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 172 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(package.Version));
             
             #line default
             #line hidden
-            this.Write("\">\r\n");
+            this.Write("\">\r\n      <PrivateAssets>");
             
-            #line 171 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
-
-			if(package.PrivateAssets != "" && package.PrivateAssets != "none")
-			{
-
-            
-            #line default
-            #line hidden
-            this.Write("\t\t<PrivateAssets>");
-            
-            #line 175 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 173 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(package.PrivateAssets));
             
             #line default
             #line hidden
-            this.Write("</PrivateAssets>\r\n\t</PackageReference>\r\n");
+            this.Write("</PrivateAssets>\r\n    </PackageReference>\r\n");
             
-            #line 177 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 175 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
-			}
-			else
-			{
+          }
+          else
+          {
 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\r\n\t</PackageReference>\t\r\n");
+            this.Write("\t  <PackageReference Include=\"");
             
-            #line 183 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 180 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(package.Include));
+            
+            #line default
+            #line hidden
+            this.Write("\" Version=\"");
+            
+            #line 180 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(package.Version));
+            
+            #line default
+            #line hidden
+            this.Write("\"/>\r\n");
+            
+            #line 181 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
-			}
+			    }
         }
 
             
@@ -454,9 +460,9 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </ItemGroup>\r\n");
             
-            #line 188 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 186 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
-	}
+  	}
 
             
             #line default
@@ -476,7 +482,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     <Reference Include=""PCLCrypto"">
       <HintPath>");
             
-            #line 204 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 202 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -485,7 +491,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "nios10+MonoTouch10\\PCLCrypto.dll</HintPath>\r\n    </Reference>\r\n    <Reference In" +
                     "clude=\"PCLStorage\">\r\n      <HintPath>");
             
-            #line 207 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 205 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -494,7 +500,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "iOS+Xamarin.Mac\\PCLStorage.dll</HintPath>\r\n    </Reference>\r\n    <Reference Incl" +
                     "ude=\"PCLStorage.Abstractions\">\r\n      <HintPath>");
             
-            #line 210 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 208 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -502,7 +508,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("PCLStorage.1.0.2\\lib\\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin." +
                     "iOS+Xamarin.Mac\\PCLStorage.Abstractions.dll</HintPath>\r\n    </Reference>\r\n");
             
-            #line 212 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 210 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
 	if(this.Project.AssemblyName == "AWSSDK.Core")
 	{
@@ -513,7 +519,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("\t<Reference Include=\"System.Net.Http\" />\r\n    <Reference Include=\"System.Net.Http" +
                     ".Extensions\">\r\n      <HintPath>");
             
-            #line 218 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -522,7 +528,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "ath>\r\n    </Reference>\r\n    <Reference Include=\"System.Net.Http.Primitives\">\r\n  " +
                     "    <HintPath>");
             
-            #line 221 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 219 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
@@ -530,7 +536,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write("Microsoft.Net.Http.2.2.29\\lib\\Xamarin.iOS10\\System.Net.Http.Primitives.dll</HintP" +
                     "ath>\r\n    </Reference>\r\n");
             
-            #line 223 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 221 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
 	}
 
@@ -538,7 +544,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line default
             #line hidden
             
-            #line 226 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 224 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
     if(this.Project.ReferenceDependencies != null)
     {
@@ -550,27 +556,27 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("    <Reference Include=\"");
             
-            #line 232 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 230 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dependency.Name));
             
             #line default
             #line hidden
             this.Write("\">\r\n      <HintPath>");
             
-            #line 233 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 231 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.NugetPackagesLocation));
             
             #line default
             #line hidden
             
-            #line 233 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 231 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dependency.HintPath));
             
             #line default
             #line hidden
             this.Write("</HintPath>\r\n      <Private>True</Private>\r\n    </Reference>\r\n");
             
-            #line 236 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+            #line 234 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
    
 		}
 	}
@@ -600,7 +606,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 258 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
+        #line 256 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\IOSProjectFile.tt"
 
 	public Project Project { get; set; }
 

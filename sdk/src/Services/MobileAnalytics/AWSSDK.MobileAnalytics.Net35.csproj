@@ -61,9 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite" Version="1.0.97.0">
-            
-    </PackageReference>    
+      <PackageReference Include="System.Data.SQLite" Version="1.0.97.0"/>
   </ItemGroup>
 
   <ItemGroup>
