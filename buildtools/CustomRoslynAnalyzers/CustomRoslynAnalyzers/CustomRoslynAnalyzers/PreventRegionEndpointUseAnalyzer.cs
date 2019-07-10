@@ -62,27 +62,6 @@ namespace CustomRoslynAnalyzers
             }
         }
 
-        // Find the Target Suppression Target
-        //private string FindSuppressionTarget(SyntaxNode expression)
-        //{
-        //    while (!expression.GetType().Equals(typeof(ClassDeclarationSyntax)))
-        //    {
-        //        var t = typeof(VariableDeclarationSyntax);
-        //        if (expression.GetType().Equals(typeof(VariableDeclarationSyntax)))
-        //        {
-        //            var invocationExpressionSyntaxNode = expression as VariableDeclarationSyntax;
-        //            return invocationExpressionSyntaxNode.ToString();
-        //        }
-        //        expression = expression.Parent;
-        //    }
-        //        //if (type.Equals(typeof(InvocationExpressionSyntax)))
-        //        //{
-        //        //    var invocationExpressionSyntaxNode = expression as InvocationExpressionSyntax;
-        //        //    return invocationExpressionSyntaxNode.ide
-        //        //}
-        //    return "";
-        //}
-
         //private void AnalyzeFieldNode(SyntaxNodeAnalysisContext context)
         //{
         //    var fieldDeclaration = (FieldDeclarationSyntax)context.Node;

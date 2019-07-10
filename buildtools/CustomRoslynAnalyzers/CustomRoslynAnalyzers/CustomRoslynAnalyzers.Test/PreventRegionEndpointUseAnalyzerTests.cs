@@ -6,6 +6,7 @@ using TestHelper;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
+using CustomRoslynAnalyzers.CodeFix;
 
 namespace CustomRoslynAnalyzers.Test
 {
