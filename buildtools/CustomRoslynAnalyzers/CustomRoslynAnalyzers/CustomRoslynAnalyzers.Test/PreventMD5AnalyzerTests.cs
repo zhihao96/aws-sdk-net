@@ -5,94 +5,66 @@ using Xunit;
 using TestHelper;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
+using CustomRoslynAnalyzers.Test.Data;
+using CustomRoslynAnalyzers.CodeFix;
+using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventMD5AnalyzerTests : DiagnosticVerifier
+    public class PreventMD5AnalyzerTests : CodeFixVerifier
     {
-        private const string DiagnosticMessage = "Type {0} of member {1} is a subclass of MD5. MD5 should not be used within the SDK, as it is not FIPS compliant.";
-        [Fact]
-        public void CR1000_PreventMD5Analyzer_Test()
+        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            var test = @"
-using System;
+            return new PreventMD5UseAnalyzer();
+        }
+        protected override CodeFixProvider GetCSharpCodeFixProvider()
+        {
+            return new PreventMD5UseAnalyzerCodeFix();
+        }
+
+        // A test for correct test
+        [Fact]
+        public void CR1000_PreventMD5UseAnalyzer_Correct_Test()
+        {
+            string data = @"
 using System.Security.Cryptography;
 
 namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        public MD5 test;
         static void Main(string[] args)
         {
         }
-
-        public void test3(MD5 m)
+        public void test3(object m)
         {
-            MD5 test4;
         }
-        public MD5 test5 { get; set; }
     }
 }";
-            var expectedField = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventMD5UseRuleId,
-                Message = string.Format(DiagnosticMessage, "System.Security.Cryptography.MD5", "Program"),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 9, 9)
-                    }
-            };
-
-            var expectedInParameter = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventMD5UseRuleId,
-                Message = string.Format(DiagnosticMessage, "System.Security.Cryptography.MD5", "test3"),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 14, 27)
-                    }
-            };
-
-            var expectedInMethod = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventMD5UseRuleId,
-                Message = string.Format(DiagnosticMessage, "System.Security.Cryptography.MD5", "test3"),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 16, 13)
-                    }
-            };
-
-            var expectedProperty = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventMD5UseRuleId,
-                Message = string.Format(DiagnosticMessage, "System.Security.Cryptography.MD5", "Program"),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 18, 9)
-                    }
-            };
-
-            var expectedList = new DiagnosticResult[4];
-            expectedList[0] = expectedField;
-            expectedList[1] = expectedInParameter;
-            expectedList[2] = expectedInMethod;
-            expectedList[3] = expectedProperty;
-            VerifyCSharpDiagnostic(test, expectedList);
+            var expected = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expected);
         }
 
-        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
+        /// A test for all of the senarios including 
+        /// Field, Property, InsideMethod, 
+        /// Declare Method, PassIn Parameter to Method, Lambda Expression, Delegate
+        [Theory]
+        [MemberData(nameof(PreventMD5UseAnalyzerData.TestInsideMethodData), MemberType = typeof(PreventMD5UseAnalyzerData))]
+        public void CR1000_PreventMD5UseAnalyzer_Multiple_Tests(string data, string typeData, string belongsToData, int row, int column, string codeFixData)
         {
-            return new PreventMD5UseAnalyzer();
+            var expected = new DiagnosticResult
+            {
+                Id = DiagnosticIds.PreventMD5UseRuleId,
+                Message = string.Format(PreventMD5UseAnalyzer.MessageFormat, typeData, belongsToData),
+                Severity = DiagnosticSeverity.Error,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", row, column)
+                    }
+            };
+            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpFix(data, codeFixData);
         }
     }
 }

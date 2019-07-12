@@ -15,14 +15,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace CustomRoslynAnalyzers.CodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PreventRegionEndpointUseAnalyzerCodeFixProvider)), Shared]
-    public class PreventRegionEndpointUseAnalyzerCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PreventDateTimeNowUseAnalyzerCodeFIx)), Shared]
+    public class PreventDateTimeNowUseAnalyzerCodeFIx : CodeFixProvider
     {
-        private const string title = "Suppress Message of RegionEndpoint.";
-
-        public override ImmutableArray<string> FixableDiagnosticIds
+        private const string title = "Suppress Message of DateTime.";
+        public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(DiagnosticIds.PreventRegionEndpointUseRuleId); }
+            get { return ImmutableArray.Create(DiagnosticIds.PreventDateTimeNowUseRuleId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
@@ -30,7 +29,7 @@ namespace CustomRoslynAnalyzers.CodeFix
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        public override async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
             // This vairable is for using the method of CodeFixHelper.cs
@@ -50,7 +49,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInFieldAsync(context.Document, fieldDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInFieldAsync(context.Document, fieldDeclaration, c, DiagnosticIds.PreventDateTimeNowUseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }
@@ -59,7 +58,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInPropertyAsync(context.Document, propertyDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInPropertyAsync(context.Document, propertyDeclaration, c, DiagnosticIds.PreventDateTimeNowUseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }
@@ -69,7 +68,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInMethodAsync(context.Document, methodDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInMethodAsync(context.Document, methodDeclaration, c, DiagnosticIds.PreventDateTimeNowUseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }

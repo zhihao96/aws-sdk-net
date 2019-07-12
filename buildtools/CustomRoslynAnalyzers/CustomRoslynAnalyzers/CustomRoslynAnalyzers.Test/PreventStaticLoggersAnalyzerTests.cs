@@ -2,99 +2,68 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using TestHelper;
 using Xunit;
+using CustomRoslynAnalyzers.CodeFix;
+using CustomRoslynAnalyzers.Test.Data;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventStaticLoggersAnalyzerTests : DiagnosticVerifier
+    public class PreventStaticLoggersAnalyzerTests : CodeFixVerifier
     {
-        private const string DiagnosticMessage = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
-
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new PreventStaticLoggersAnalyzer();
         }
 
-        [Fact]
-        public void CR1002_PreventStaticLoggersAnalyzer_Field_Test()
+        protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            var test = @"
-using System;
+            return new PreventStaticLoggerAnalyzerCodeFix();
+        }
 
+        // A test for the Correct Case
+        [Fact]
+        public void CR1002_PreventRegionEndpointUseAnalyzer_Correct_Tests()
+        {
+            string data = @"
 namespace TestPreventStaticLoggersAnalyzer
 {
-    public interface ILogger
-    {
-        void TestMethod();
-    }
-    public class Logger : ILogger
-    {
-        public void TestMethod()
-        {
-        }
-    }
     class Program
     {
-        public static Logger B;  
         static void Main(string[] args)
         {
         }
     }
 }";
+            var expected = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expected);
+        }
+
+        // A test for all of the senarios including Static Field, Static Property
+        [Theory]
+        [MemberData(nameof(PreventStaticLoggersAnalyzerData.AllTestData), MemberType = typeof(PreventStaticLoggersAnalyzerData))]
+        public void CR1002_PreventStaticLoggersAnalyzer_Multiple_Tests(string dataWithoutLogger, 
+            string declaringTypeName, string selfType, string interfaceName, 
+            int row, int column, string codeFixDataWithoutLogger, string dataImplementILogger)
+        {
+            var data = string.Format(dataWithoutLogger, dataImplementILogger);
+            var codeFixData = string.Format(codeFixDataWithoutLogger, dataImplementILogger);
+
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventStaticLoggersRuleId,
-                Message = string.Format(DiagnosticMessage, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger"),
+                Message = string.Format(PreventStaticLoggersAnalyzer.MessageFormat, declaringTypeName, selfType, interfaceName),
                 Severity = DiagnosticSeverity.Error,
                 Locations =
                     new[]
                     {
-                        new DiagnosticResultLocation("Test0.cs", 18, 9)
+                        new DiagnosticResultLocation("Test0.cs", row, column)
                     }
             };
-            VerifyCSharpDiagnostic(test, expected);
-        }
-
-        [Fact]
-        public void CR1002_PreventStaticLoggersAnalyzer_Property_Test()
-        {
-            var test = @"
-using System;
-
-namespace TestPreventStaticLoggersAnalyzer
-{
-    public interface ILogger
-    {
-        void TestMethod();
-    }
-    public class Logger : ILogger
-    {
-        public void TestMethod()
-        {
-        }
-    }
-    class Program
-    {
-        public static Logger A { set; get; }
-        static void Main(string[] args)
-        {
-        }
-    }
-}";
-            var expected = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventStaticLoggersRuleId,
-                Message = string.Format(DiagnosticMessage, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger"),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 18, 9)
-                    }
-            };
-            VerifyCSharpDiagnostic(test, expected);
+            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpFix(data, codeFixData);
         }
     }
 }

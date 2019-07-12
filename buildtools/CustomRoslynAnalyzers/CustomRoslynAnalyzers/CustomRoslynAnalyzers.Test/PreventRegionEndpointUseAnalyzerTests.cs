@@ -7,76 +7,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using CustomRoslynAnalyzers.CodeFix;
+using CustomRoslynAnalyzers.Test.Data;
 
 namespace CustomRoslynAnalyzers.Test
 {
     public class PreventRegionEndpointUseAnalyzerTests : CodeFixVerifier
     {
-        private const string DiagnosticMessage = "Target member uses {0}. This member {1} be used within the SDK.{2}";
         private const string USEast1ResolutionMessage = " Evaluate whether this usage is safe and add a suppression if it is.";
-
-        [Fact]
-        public void CR1004_PreventRegionEndpointUseAnalyzer_Tests()
-        {
-            var test = @"
-using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestPreventRegionEndPointUseAnalyzer
-{
-    class RegionEndpoint
-    {
-        public static string USEast1 = """";
-        public static string USSouth1 = """";
-    }
-    class Program
-    {
-        public string test4 = RegionEndpoint.USEast1;
-
-        static void Main(string[] args)
-        {
-        }
-    }
-}";
-            var expectedField = new DiagnosticResult
-            {
-                Id = DiagnosticIds.PreventRegionEndpointUseRuleId,
-                Message = string.Format(DiagnosticMessage, "RegionEndpoint.USEast1", "shouldn't usually", USEast1ResolutionMessage),
-                Severity = DiagnosticSeverity.Error,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 14, 31)
-                    }
-            };
-
-            VerifyCSharpDiagnostic(test, expectedField);
-
-
-
-            var codeFix = @"
-using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestPreventRegionEndPointUseAnalyzer
-{
-    class RegionEndpoint
-    {
-        public static string USEast1 = """";
-        public static string USSouth1 = """";
-    }
-    class Program
-    {
-        [SuppressMessage(""AwsSdkRules"", ""CR1004"")]
-        public string test4 = RegionEndpoint.USEast1;
-
-        static void Main(string[] args)
-        {
-        }
-    }
-}";
-            VerifyCSharpFix(test, codeFix);
-        }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
@@ -85,6 +22,44 @@ namespace TestPreventRegionEndPointUseAnalyzer
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
             return new PreventRegionEndpointUseAnalyzerCodeFixProvider();
+        }
+
+        // A Test for the correct test
+        [Fact]
+        public void CR1004_PreventRegionEndpointUseAnalyzer_Correct_Tests()
+        {
+            string data = @"
+namespace TestPreventRegionEndpointUseAnalyzer
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}";
+            var expected = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expected);
+        }
+
+        // A test for all of the senarios including Field, Property, InsideMethod, Declare Method, PassIn Parameter to Method, Lambda Expression, Delegate
+        [Theory]
+        [MemberData(nameof(PreventRegionEndpointUseAnalyzerData.TestInsideMethodData), MemberType = typeof(PreventRegionEndpointUseAnalyzerData))]
+        public void CR1004_PreventRegionEndpointUseAnalyzer_Multiple_Tests(string data, int row, int column, string codeFixData)
+        {
+            var expected = new DiagnosticResult
+            {
+                Id = DiagnosticIds.PreventRegionEndpointUseRuleId,
+                Message = string.Format(PreventRegionEndpointUseAnalyzer.MessageFormat, "RegionEndpoint.USEast1", "shouldn't usually", USEast1ResolutionMessage),
+                Severity = DiagnosticSeverity.Error,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", row, column)
+                    }
+            };
+            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpFix(data, codeFixData);
         }
     }
 }

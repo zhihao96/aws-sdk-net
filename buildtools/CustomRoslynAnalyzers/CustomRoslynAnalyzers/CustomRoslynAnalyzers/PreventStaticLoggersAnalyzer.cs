@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,7 +13,7 @@ namespace CustomRoslynAnalyzers
     public class PreventStaticLoggersAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not store ILogger instances in static members.";
-        private const string MessageFormat = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
+        public const string MessageFormat = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
         private const string Category = "AwsSdkRules";
         private const string Description = "Checks code for static ILogger variables.";
 
@@ -30,7 +29,6 @@ namespace CustomRoslynAnalyzers
 
         public override void Initialize(AnalysisContext context)
         {
-            //context.RegisterSymbolAction(AnalyzeFieldNode, SymbolKind.Field);
             context.RegisterSyntaxNodeAction(AnalyzeFieldNode, SyntaxKind.FieldDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzePropertyNode, SyntaxKind.PropertyDeclaration);
         }

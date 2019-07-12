@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -45,8 +43,7 @@ namespace CustomRoslynAnalyzers
                 || memberAccessExprName == nameof(DateTime.Today))
             {
                 var memberSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol;
-                if (memberSymbol == null)
-                    return;
+                if (memberSymbol == null) return;
                 // check the method is a member of the class DateTime
                 var memberSymbolSpecialType = memberSymbol.ContainingType.SpecialType;
                 if (memberSymbolSpecialType == SpecialType.System_DateTime)

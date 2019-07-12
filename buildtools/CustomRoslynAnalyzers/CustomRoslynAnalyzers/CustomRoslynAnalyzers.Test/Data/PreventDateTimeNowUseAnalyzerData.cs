@@ -4,11 +4,11 @@ using System.Text;
 
 namespace CustomRoslynAnalyzers.Test.Data
 {
-    class PreventHashAlgorithmCreateAnalyzerData
+    public class PreventDateTimeNowUseAnalyzerData
     {
         private const string BasicCorrectData = @"
 using System;
-using System.Security.Cryptography;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {
@@ -20,9 +20,9 @@ namespace TestPreventTimeNowUseAnalyzer
         }
     }
 }";
+
         private const string BasicMethodData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
@@ -37,29 +37,45 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string BasicFieldData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        public HashAlgorithm test = {0};
+        public DateTime test = {0};
         static void Main(string[] args)
+        {{
+        }}
+    }}
+}}";
+        private const string BasicPassInParameterData = @"
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace TestPreventTimeNowUseAnalyzer
+{{
+    class Program
+    {{
+        static void Main(string[] args)
+        {{
+            TestMethod({0});
+        }}
+
+        public static void TestMethod(DateTime d)
         {{
         }}
     }}
 }}";
         private const string BasicPropertyData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        public HashAlgorithm test4
+        public DateTime test3
         {{
             get
             {{
@@ -71,35 +87,15 @@ namespace TestPreventTimeNowUseAnalyzer
         }}
     }}
 }}";
-        private const string BasicPassInParameterData = @"
-using System;
-using System.Security.Cryptography;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestPreventHashAlgorithmCreateAnalyzer
-{{
-    class Program
-    {{
-        static void Main(string[] args)
-        {{
-            TestMethod({0});
-        }}
-
-        public static void TestMethod(HashAlgorithm h)
-        {{
-        }}
-    }}
-}}";
         private const string BasicLambdaData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        Func<int, int, HashAlgorithm> testForEquality = (x, y) => {0};
+        Func<DateTime, int, DateTime> testForEquality = (x, y) => {0};
         static void Main(string[] args)
         {{
         }}
@@ -107,15 +103,14 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string BasicDelegateData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
-    public delegate HashAlgorithm HashAlgorithmFunc();
+    public delegate DateTime DateFunc();
     class Program
     {{
-        HashAlgorithmFunc dateFunc = delegate () {{ return {0}; }};
+        DateFunc dateFunc = delegate () {{ return {0}; }};
         static void Main(string[] args)
         {{
         }}
@@ -124,14 +119,13 @@ namespace TestPreventTimeNowUseAnalyzer
 
         private const string MethodCodeFixData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
         static void Main(string[] args)
         {{
             var test = {0};
@@ -140,15 +134,14 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string FieldCodeFixData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
-        public HashAlgorithm test = {0};
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        public DateTime test = {0};
         static void Main(string[] args)
         {{
         }}
@@ -156,35 +149,33 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string PassInParameterCodeFixData = @"
 using System;
-using System.Security.Cryptography;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestPreventHashAlgorithmCreateAnalyzer
-{{
-    class Program
-    {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
-        static void Main(string[] args)
-        {{
-            TestMethod({0});
-        }}
-
-        public static void TestMethod(HashAlgorithm h)
-        {{
-        }}
-    }}
-}}";
-        private const string PropertyCodeFixData = @"
-using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
-        public HashAlgorithm test4
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        static void Main(string[] args)
+        {{
+            TestMethod({0});
+        }}
+
+        public static void TestMethod(DateTime d)
+        {{
+        }}
+    }}
+}}";
+        private const string PropertyCodeFixData = @"
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace TestPreventTimeNowUseAnalyzer
+{{
+    class Program
+    {{
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        public DateTime test3
         {{
             get
             {{
@@ -198,15 +189,14 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string LambdaCodeFixData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
-        Func<int, int, HashAlgorithm> testForEquality = (x, y) => {0};
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        Func<DateTime, int, DateTime> testForEquality = (x, y) => {0};
         static void Main(string[] args)
         {{
         }}
@@ -214,23 +204,21 @@ namespace TestPreventTimeNowUseAnalyzer
 }}";
         private const string DelegateCodeFixData = @"
 using System;
-using System.Security.Cryptography;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestPreventTimeNowUseAnalyzer
 {{
-    public delegate HashAlgorithm HashAlgorithmFunc();
+    public delegate DateTime DateFunc();
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
-        HashAlgorithmFunc dateFunc = delegate () {{ return {0}; }};
+        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        DateFunc dateFunc = delegate () {{ return {0}; }};
         static void Main(string[] args)
         {{
         }}
     }}
 }}";
 
-        public static IEnumerable<object[]> TestCorrectData => new List<string[]> { new string[] { BasicCorrectData } };
         private static List<string[]> MethodData => CreateSeperateData(BasicMethodData, MethodCodeFixData);
         private static List<string[]> FieldData => CreateSeperateData(BasicFieldData, FieldCodeFixData);
         private static List<string[]> PassInParameterData => CreateSeperateData(BasicPassInParameterData, PassInParameterCodeFixData);
@@ -238,10 +226,11 @@ namespace TestPreventTimeNowUseAnalyzer
         private static List<string[]> LambdaData => CreateSeperateData(BasicLambdaData, LambdaCodeFixData);
         private static List<string[]> DelegateData => CreateSeperateData(BasicDelegateData, DelegateCodeFixData);
 
+        public static IEnumerable<object[]> TestCorrectData => new List<string[]> { new string[] { BasicCorrectData } };
         public static IEnumerable<object[]> TestMethodData => MethodData;
         public static IEnumerable<object[]> TestFieldData => FieldData;
-        public static IEnumerable<object[]> TestPropertyData => PropertyData;
         public static IEnumerable<object[]> TestPassInParameterData => PassInParameterData;
+        public static IEnumerable<object[]> TestPropertyData => PropertyData;
         public static IEnumerable<object[]> TestLambdaData => LambdaData;
         public static IEnumerable<object[]> TestDelegateData => DelegateData;
 
@@ -249,8 +238,9 @@ namespace TestPreventTimeNowUseAnalyzer
         {
             return new List<string[]>
             {
-                new string[] { basicData, "HashAlgorithm.Create()", codeFixData},
-                new string[] { basicData, "HashAlgorithm.Create(\"test\")", codeFixData},
+                new string[] { basicData, "DateTime.Now", codeFixData},
+                new string[] { basicData, "DateTime.Today", codeFixData},
+                new string[] { basicData, "DateTime.UtcNow", codeFixData}
             };
         }
     }

@@ -15,14 +15,14 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace CustomRoslynAnalyzers.CodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PreventRegionEndpointUseAnalyzerCodeFixProvider)), Shared]
-    public class PreventRegionEndpointUseAnalyzerCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PreventMD5UseAnalyzerCodeFix)), Shared]
+    public class PreventMD5UseAnalyzerCodeFix : CodeFixProvider
     {
-        private const string title = "Suppress Message of RegionEndpoint.";
+        private const string title = "Suppress Message of MD5.";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
+        public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(DiagnosticIds.PreventRegionEndpointUseRuleId); }
+            get { return ImmutableArray.Create(DiagnosticIds.PreventMD5UseRuleId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
@@ -30,7 +30,7 @@ namespace CustomRoslynAnalyzers.CodeFix
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        public override async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public async sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
             // This vairable is for using the method of CodeFixHelper.cs
@@ -50,7 +50,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInFieldAsync(context.Document, fieldDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInFieldAsync(context.Document, fieldDeclaration, c, DiagnosticIds.PreventMD5UseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }
@@ -59,7 +59,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInPropertyAsync(context.Document, propertyDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInPropertyAsync(context.Document, propertyDeclaration, c, DiagnosticIds.PreventMD5UseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }
@@ -69,7 +69,7 @@ namespace CustomRoslynAnalyzers.CodeFix
                 context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => codeFixHelper.CodeFixHelperInMethodAsync(context.Document, methodDeclaration, c, DiagnosticIds.PreventRegionEndpointUseRuleId),
+                    createChangedSolution: c => codeFixHelper.CodeFixHelperInMethodAsync(context.Document, methodDeclaration, c, DiagnosticIds.PreventMD5UseRuleId),
                     equivalenceKey: title),
                     diagnostic);
             }

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,7 +12,7 @@ namespace CustomRoslynAnalyzers
     public class PreventMD5UseAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not use MD5";
-        private const string MessageFormat = "Type {0} of member {1} is a subclass of MD5. MD5 should not be used within the SDK, as it is not FIPS compliant.";
+        public const string MessageFormat = "Type {0} of member {1} is a subclass of MD5. MD5 should not be used within the SDK, as it is not FIPS compliant.";
         private const string Category = "AwsSdkRules";
         private const string Description = "Checks code for MD5 uses.";
 
@@ -33,6 +31,7 @@ namespace CustomRoslynAnalyzers
             context.RegisterSyntaxNodeAction(AnalyzePropertyNode, SyntaxKind.PropertyDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeFieldNode, SyntaxKind.FieldDeclaration);
             context.RegisterSyntaxNodeAction(AnalyzeMethodNode, SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeAction(AnalyzeInvocationExpressionNode, SyntaxKind.InvocationExpression);
         }
 
         // Analyze the Property Declaration
@@ -43,7 +42,7 @@ namespace CustomRoslynAnalyzers
                 return;
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol != null)
-                CheckType(propertySymbol.Type, context, propertyDeclaration.GetLocation());
+                CheckType(propertySymbol.Type, context, propertyDeclaration.Type.GetLocation());
         }
 
         // Analyze the Field Declaration
@@ -52,9 +51,17 @@ namespace CustomRoslynAnalyzers
             var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
             if (fieldDeclaration == null)
                 return;
+
             var fieldSymbol = (INamedTypeSymbol)context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol;
             if (fieldSymbol != null)
+            {
+                // Check for Lambda expression's type
+                var genericTypeofLambdaFunc = fieldDeclaration.Declaration.Type as GenericNameSyntax;
+                if (genericTypeofLambdaFunc != null)
+                    AnalyzeLambdaExpressionType(context, genericTypeofLambdaFunc);
+                // Check for the rest of field symbol
                 CheckType(fieldSymbol, context, fieldDeclaration.GetLocation());
+            } 
         }
 
         // Analyze the Method
@@ -79,8 +86,46 @@ namespace CustomRoslynAnalyzers
                     if (localDeclaration != null)
                     {
                         var typeSymbol = context.SemanticModel.GetSymbolInfo(localDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
-                        if (typeSymbol != null)
-                            CheckType(typeSymbol, context, statement.GetLocation());
+                        if (typeSymbol != null && !localDeclaration.Declaration.Type.ToString().Equals("var"))
+                            CheckType(typeSymbol, context, localDeclaration.Declaration.Type.GetLocation());
+                    }
+                }
+            }
+        }
+
+        // Analyze the extra senario - Invocation Expression 
+        private void AnalyzeInvocationExpressionNode(SyntaxNodeAnalysisContext context)
+        {
+            var invocationExpr = (InvocationExpressionSyntax)context.Node;
+            if (invocationExpr == null) return;
+
+            // memeberAccessExpr equals the expression before "(", which is HashAlgorithm.Create
+            var memberAccessExpr = invocationExpr.Expression as MemberAccessExpressionSyntax;
+
+            if (memberAccessExpr == null) return;
+            var memberAccessExprName = memberAccessExpr.Name.ToString();
+            if (memberAccessExprName == "Create")
+            {
+                var memberSymbol = context.SemanticModel.GetSymbolInfo(memberAccessExpr).Symbol;
+                if (memberSymbol == null) return;
+                var memberSymbolSpecialType = memberSymbol.ContainingType;
+                if (memberSymbolSpecialType != null)
+                    CheckType(memberSymbolSpecialType, context, invocationExpr.GetLocation());
+            }
+        }
+
+        // Analyze the Lambda expression's generic type
+        private void AnalyzeLambdaExpressionType(SyntaxNodeAnalysisContext context, GenericNameSyntax genericTypeofLambdaFunc)
+        {
+            if (genericTypeofLambdaFunc.GetType().Equals(typeof(GenericNameSyntax)))
+            {
+                foreach (var argument in genericTypeofLambdaFunc.TypeArgumentList.Arguments)
+                {
+                    var argumentNameSyntax = argument as IdentifierNameSyntax;
+                    if (argumentNameSyntax != null && argumentNameSyntax.Identifier.Text.Equals("MD5"))
+                    {
+                        var argumentSymbol = (INamedTypeSymbol)context.SemanticModel.GetSymbolInfo(argument).Symbol;
+                        CheckType(argumentSymbol, context, argument.GetLocation());
                     }
                 }
             }
@@ -126,7 +171,8 @@ namespace CustomRoslynAnalyzers
                         return (node as MethodDeclarationSyntax).Identifier.Text;
                     }
                     if (node.GetType().Equals(typeof(FieldDeclarationSyntax))
-                        || node.GetType().Equals(typeof(PropertyDeclarationSyntax)))
+                        || node.GetType().Equals(typeof(PropertyDeclarationSyntax))
+                        || node.GetType().Equals(typeof(InvocationExpressionSyntax)))
                     {
                         return (ancestor as ClassDeclarationSyntax).Identifier.Text;
                     }
@@ -136,7 +182,6 @@ namespace CustomRoslynAnalyzers
                     var methodDeclarationSyntax = ancestor as MethodDeclarationSyntax;
                     return methodDeclarationSyntax.Identifier.Text;
                 }
-
             }
             return "null";
         }

@@ -3,10 +3,12 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using System;
+using System.Runtime;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Reflection;
 
 namespace TestHelper
 {
@@ -22,6 +24,9 @@ namespace TestHelper
         private static readonly MetadataReference CodeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
         private static readonly MetadataReference HashAlgorithmReference = MetadataReference.CreateFromFile(typeof(HashAlgorithm).Assembly.Location);
         private static readonly MetadataReference MD5Reference = MetadataReference.CreateFromFile(typeof(MD5).Assembly.Location);
+        private static readonly MetadataReference RunTimeReference = MetadataReference.CreateFromFile(Assembly.Load("netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51").Location);
+        private static readonly MetadataReference NetStandardReference = MetadataReference.CreateFromFile(Assembly.Load("System.Runtime, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a").Location);
+        private static readonly MetadataReference AmazonReference = MetadataReference.CreateFromFile("C:\\codebase\\v3\\AWSDotNetPublic\\sdk\\src\\Core\\bin\\Debug\\netstandard2.0\\AWSSDK.Core.dll");
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
@@ -157,7 +162,10 @@ namespace TestHelper
                 .AddMetadataReference(projectId, CSharpSymbolsReference)
                 .AddMetadataReference(projectId, CodeAnalysisReference)
                 .AddMetadataReference(projectId, HashAlgorithmReference)
-                .AddMetadataReference(projectId, MD5Reference);
+                .AddMetadataReference(projectId, RunTimeReference)
+                .AddMetadataReference(projectId, MD5Reference)
+                .AddMetadataReference(projectId, AmazonReference)
+                .AddMetadataReference(projectId, NetStandardReference);
 
             int count = 0;
             foreach (var source in sources)

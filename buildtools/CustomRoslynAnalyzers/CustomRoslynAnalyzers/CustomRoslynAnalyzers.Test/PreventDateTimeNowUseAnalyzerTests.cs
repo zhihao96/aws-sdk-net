@@ -6,62 +6,92 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using TestHelper;
 using Xunit;
 using CustomRoslynAnalyzers.Test.Data;
+using CustomRoslynAnalyzers.CodeFix;
+using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventDateTimeNowUseAnalyzerTests : DiagnosticVerifier
+    public class PreventDateTimeNowUseAnalyzerTests : CodeFixVerifier
     {
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new PreventDateTimeNowUseAnalyzer();
         }
+        protected override CodeFixProvider GetCSharpCodeFixProvider()
+        {
+            return new PreventDateTimeNowUseAnalyzerCodeFIx();
+        }
 
         [Theory]
-        [MemberData(nameof(PreventDataTimeNowUseAnalyzerData.TestCorrectData), MemberType = typeof(PreventDataTimeNowUseAnalyzerData))]
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestCorrectData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
         public void CR1003_PreventDateTimeNowUseAnalyzer_Correct_Test(string data)
         {
             var expected = new DiagnosticResult[0];
             VerifyCSharpDiagnostic(data, expected);
         }
 
-        // Test DateTime.Today and DateTime.Now and DateTime.UtcNow in methods
+        // A Test for DateTime.Today and DateTime.Now and DateTime.UtcNow in methods
         [Theory]
-        [MemberData(nameof(PreventDataTimeNowUseAnalyzerData.TestMethodData), MemberType = typeof(PreventDataTimeNowUseAnalyzerData))]
-        public void CR1003_PreventDateTimeUseAnalyzer_Methods_Tests(string data, string attribute)
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestMethodData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Methods_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
-            CompareActualAndExpected(testData, "Main", "Program", attribute, 10, 24);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "Main", "Program", attribute, 11, 24, testCodeFixData);
         }
 
-        // Test DateTime.Use and DateTime.Now and DateTime.UtcNow in field
+        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in field
         [Theory]
-        [MemberData(nameof(PreventDataTimeNowUseAnalyzerData.TestFieldData), MemberType = typeof(PreventDataTimeNowUseAnalyzerData))]
-        public void CR1003_PreventDateTimeUseAnalyzer_Field_Tests(string data, string attribute)
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestFieldData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Field_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
-            CompareActualAndExpected(testData, "null", "Program", attribute, 8, 32);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "null", "Program", attribute, 9, 32, testCodeFixData);
         }
 
-        // Test DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
+        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
         [Theory]
-        [MemberData(nameof(PreventDataTimeNowUseAnalyzerData.TestParameterData), MemberType = typeof(PreventDataTimeNowUseAnalyzerData))]
-        public void CR1003_PreventDateTimeUseAnalyzer_Parameter_Tests(string data, string attribute)
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestPassInParameterData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Parameter_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
-            CompareActualAndExpected(testData, "Main", "Program", attribute, 10, 24);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "Main", "Program", attribute, 11, 24, testCodeFixData);
         }
 
-        // Test DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
+        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
         [Theory]
-        [MemberData(nameof(PreventDataTimeNowUseAnalyzerData.TestPropertyData), MemberType = typeof(PreventDataTimeNowUseAnalyzerData))]
-        public void CR1003_PreventDateTimeUseAnalyzer_Property_Tests(string data, string attribute)
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestPropertyData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Property_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
-            CompareActualAndExpected(testData, "null", "Program", attribute, 12, 24);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "null", "Program", attribute, 13, 24, testCodeFixData);
+        }
+
+        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Lambda expressions
+        [Theory]
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestLambdaData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Lambda_Tests(string data, string attribute, string codeFixData)
+        {
+            var testData = string.Format(data, attribute);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "null", "Program", attribute, 9, 67, testCodeFixData);
+        }
+
+        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Delegate expressions
+        [Theory]
+        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestDelegateData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        public void CR1003_PreventDateTimeUseAnalyzer_Delegate_Tests(string data, string attribute, string codeFixData)
+        {
+            var testData = string.Format(data, attribute);
+            var testCodeFixData = string.Format(codeFixData, attribute);
+            CompareActualAndExpected(testData, "null", "Program", attribute, 10, 50, testCodeFixData);
         }
 
         // Compare the actual diagnostic result with expected result
-        private void CompareActualAndExpected(string testData, string method, string className, string dateTimeAttribute, int row, int colomn)
+        private void CompareActualAndExpected(string testData, string method, string className, string dateTimeAttribute, int row, int colomn, string testCodeFixData)
         {
             var expected = new DiagnosticResult
             {
@@ -75,6 +105,7 @@ namespace CustomRoslynAnalyzers.Test
                     }
             };
             VerifyCSharpDiagnostic(testData, expected);
+            VerifyCSharpFix(testData, testCodeFixData);
         }
     }
 }
