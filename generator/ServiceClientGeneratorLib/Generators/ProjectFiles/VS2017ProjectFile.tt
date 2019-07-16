@@ -105,7 +105,14 @@
 
 <#
     }
-
+    if(this.Project.CustomRoslynAnalyzersDllDirectory != null)
+    {
+#>
+  <ItemGroup>
+    <Analyzer Include= "<#=this.Project.CustomRoslynAnalyzersDllDirectory#>" />
+  </ItemGroup>
+<#
+    }
     if(this.Project.IndividualFileIncludes != null)
     {
 #>

@@ -38,6 +38,9 @@
   </Choose>
 
   <ItemGroup>
+    <Analyzer Include= "..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="**/_android/**"/>
     <Compile Remove="**/_async/**"/>
     <Compile Remove="**/_bcl45/**"/>

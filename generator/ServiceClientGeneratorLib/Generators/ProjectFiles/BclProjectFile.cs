@@ -539,7 +539,16 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             
             #line default
             #line hidden
-            this.Write(@"
+            this.Write("\r\n  <ItemGroup>\r\n    <Analyzer Include= \"");
+            
+            #line 216 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.CustomRoslynAnalyzersDllDirectory));
+            
+            #line default
+            #line hidden
+            this.Write(@""" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include=""Properties\AssemblyInfo.cs"" />
   </ItemGroup>
@@ -551,7 +560,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     </PropertyGroup>
 ");
             
-            #line 224 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+            #line 228 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	if(IsDependencyPresentFor35("System.Data.SQLite"))
 	{
@@ -562,7 +571,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             this.Write(@"    <Error Condition=""!Exists('..\..\..\packages\System.Data.SQLite.Core.1.0.97.0\build\net20\System.Data.SQLite.Core.targets')"" Text=""$([System.String]::Format('$(ErrorText)', '..\..\..\packages\System.Data.SQLite.Core.1.0.97.0\build\net20\System.Data.SQLite.Core.targets'))"" />
 ");
             
-            #line 229 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+            #line 233 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	}
 
@@ -571,7 +580,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line hidden
             this.Write("  </Target>\r\n");
             
-            #line 233 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+            #line 237 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	if(IsDependencyPresentFor35("System.Data.SQLite"))
 	{
@@ -583,7 +592,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
                     "\\System.Data.SQLite.Core.targets\" Condition=\"Exists(\'..\\..\\..\\packages\\System.Da" +
                     "ta.SQLite.Core.1.0.97.0\\build\\net20\\System.Data.SQLite.Core.targets\')\" />\r\n");
             
-            #line 238 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+            #line 242 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	}
 
@@ -602,7 +611,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 249 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+        #line 253 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	private bool IsDependencyPresentFor35(string name)
 	{
@@ -619,7 +628,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
         #line default
         #line hidden
         
-        #line 262 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
+        #line 266 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"
 
 	public Project Project { get; set; }
 

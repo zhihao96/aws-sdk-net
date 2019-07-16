@@ -126,5 +126,10 @@ namespace ServiceClientGenerator
         /// Used to generate the RuleSet path of the project file
         /// </summary>
         public string FxcopAnalyzerRuleSetDirectory { get; set; }
+
+        /// <summary>
+        /// Used to generate the Custom Roslyn Analyzers dll directory
+        /// </summary>
+        public string CustomRoslynAnalyzersDllDirectory { get; set; }
     }
 }

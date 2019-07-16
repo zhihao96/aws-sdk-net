@@ -70,7 +70,8 @@ namespace ServiceClientGenerator
                     SupressWarnings        = configuration.NoWarn,
                     OutputPathOverride     = configuration.OutputPathOverride,
                     SignBinaries           = false,
-                    FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset"
+                    FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset",
+                    CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll"
                 };
                 if (_isLegacyProj)
                 {

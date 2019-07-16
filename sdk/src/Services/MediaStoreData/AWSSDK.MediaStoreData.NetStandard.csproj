@@ -39,6 +39,9 @@
   </Choose>
 
   <ItemGroup>
+    <Analyzer Include= "..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="**/_pcl/**"/>
     <Compile Remove="**/_pcl-sl/**"/>
     <Compile Remove="**/_bcl35/**"/>

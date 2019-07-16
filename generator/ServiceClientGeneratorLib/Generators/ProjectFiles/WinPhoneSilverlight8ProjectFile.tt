@@ -191,6 +191,10 @@
 #>
 
   <ItemGroup>
+    <Analyzer Include= "<#=this.Project.CustomRoslynAnalyzersDllDirectory#>" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<None Include="packages.config" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

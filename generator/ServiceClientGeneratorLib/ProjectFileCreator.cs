@@ -76,6 +76,7 @@ namespace ServiceClientGenerator
                     projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                     projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
                     projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
+                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
 
                     var projectConfigurationData = new ProjectConfigurationData { ProjectGuid = projectGuid };
                     var projectName = Path.GetFileNameWithoutExtension(projectFilename);
@@ -174,6 +175,7 @@ namespace ServiceClientGenerator
                 projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                 projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
                 projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
+                projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
 
                 var projectConfigurationData = new ProjectConfigurationData { ProjectGuid = projectGuid };
                 var projectName = Path.GetFileNameWithoutExtension(projectFilename);
@@ -278,6 +280,7 @@ namespace ServiceClientGenerator
             projectProperties.SignBinaries          = true;
             projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
             projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\..\AWSDotNetSDK.ruleset";
+            projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
 
             List<Dependency> dependencies;
             List<PackageReference> references = new List<PackageReference>();
