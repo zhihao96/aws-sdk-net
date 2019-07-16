@@ -51,7 +51,8 @@ namespace CustomRoslynAnalyzers
                     var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "shouldn't usually", ExtraResolutionMessage);
                     context.ReportDiagnostic(diagnostic);
                 }
-                else
+                // To check if it is a member and not a method
+                else if (!memberSymbol.ToString().Contains("()"))
                 {
                     var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "should never", "");
                     context.ReportDiagnostic(diagnostic);
