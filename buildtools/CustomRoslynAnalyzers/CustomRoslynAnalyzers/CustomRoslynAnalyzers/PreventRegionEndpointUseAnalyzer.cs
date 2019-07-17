@@ -52,7 +52,7 @@ namespace CustomRoslynAnalyzers
                     context.ReportDiagnostic(diagnostic);
                 }
                 // To check if it is a member and not a method
-                else if (!memberSymbol.ToString().Contains("()"))
+                else if (!memberSymbol.ToString().Contains("("))
                 {
                     var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "should never", "");
                     context.ReportDiagnostic(diagnostic);
