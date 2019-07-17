@@ -78,7 +78,7 @@ namespace TestPreventStaticLoggersAnalyzer
     {0}
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1002"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1002:PreventStaticLoggersRule"")]
         public static Logger B;  
         static void Main(string[] args)
         {{
@@ -95,7 +95,7 @@ namespace TestPreventStaticLoggersAnalyzer
     {0}
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1002"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1002:PreventStaticLoggersRule"")]
         public static Logger A {{ set; get; }}
         static void Main(string[] args)
         {{

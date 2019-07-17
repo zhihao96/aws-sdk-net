@@ -41,7 +41,7 @@ namespace CustomRoslynAnalyzers.Test
             CompareActualAndExpected(testData, "Main", "Program", invocation, 12, 24, testCodeFixData);   
         }
 
-        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in field
+        // A Test for HashAlgorithm.Create() in field
         [Theory]
         [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestFieldData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Field_Test(string data, string invocation, string codeFixData)
@@ -51,7 +51,7 @@ namespace CustomRoslynAnalyzers.Test
             CompareActualAndExpected(testData, "null", "Program", invocation, 10, 37, testCodeFixData);
         }
 
-        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Property
+        // A Test for HashAlgorithm.Create() in Property
         [Theory]
         [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestPropertyData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Property_Test(string data, string invocation, string codeFixData)
@@ -61,7 +61,7 @@ namespace CustomRoslynAnalyzers.Test
             CompareActualAndExpected(testData, "null", "Program", invocation, 14, 24, testCodeFixData);
         }
 
-        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Parameter
+        // A Test for HashAlgorithm.Create() in Parameter
         [Theory]
         [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestPassInParameterData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Parameter_Test(string data, string invocation, string codeFixData)
@@ -71,7 +71,7 @@ namespace CustomRoslynAnalyzers.Test
             CompareActualAndExpected(testData, "Main", "Program", invocation, 12, 24, testCodeFixData);
         }
 
-        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Lambda Expression
+        // A Test for HashAlgorithm.Create() in Lambda Expression
         [Theory]
         [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestLambdaData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Lambda_Test(string data, string invocation, string codeFixData)
@@ -81,7 +81,7 @@ namespace CustomRoslynAnalyzers.Test
             CompareActualAndExpected(testData, "null", "Program", invocation, 10, 67, testCodeFixData);
         }
 
-        // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Delegate
+        // A Test for HashAlgorithm.Create() in Delegate
         [Theory]
         [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestDelegateData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Delegate_Test(string data, string invocation, string codeFixData)

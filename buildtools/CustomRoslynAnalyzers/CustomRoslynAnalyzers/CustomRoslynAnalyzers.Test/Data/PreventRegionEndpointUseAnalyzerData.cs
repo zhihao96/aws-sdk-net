@@ -111,7 +111,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         public RegionEndpoint test4 = RegionEndpoint.USEast1;
         static void Main(string[] args)
         {
@@ -127,7 +127,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         public RegionEndpoint Test6
         {
             get { return RegionEndpoint.USEast1; }
@@ -144,7 +144,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         static void Main(string[] args)
         {
             var test2 = RegionEndpoint.USEast1;
@@ -160,7 +160,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         static void Main(string[] args)
         {
             test(RegionEndpoint.USEast1);
@@ -179,7 +179,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         public Func<RegionEndpoint> test = () => RegionEndpoint.USEast1;
         static void Main(string[] args)
         {
@@ -196,7 +196,7 @@ namespace TestPreventRegionEndPointUseAnalyzer
     delegate RegionEndpoint RegionEndpointFunc();
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1004:PreventRegionEndpointUseRule"")]
         RegionEndpointFunc regionEndpointFunc = delegate () { return RegionEndpoint.USEast1; };
         static void Main(string[] args)
         {

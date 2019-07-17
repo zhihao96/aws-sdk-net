@@ -125,7 +125,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         static void Main(string[] args)
         {{
             var test = {0};
@@ -140,7 +140,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         public DateTime test = {0};
         static void Main(string[] args)
         {{
@@ -155,7 +155,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         static void Main(string[] args)
         {{
             TestMethod({0});
@@ -174,7 +174,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         public DateTime test3
         {{
             get
@@ -195,7 +195,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         Func<DateTime, int, DateTime> testForEquality = (x, y) => {0};
         static void Main(string[] args)
         {{
@@ -211,7 +211,7 @@ namespace TestPreventTimeNowUseAnalyzer
     public delegate DateTime DateFunc();
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1003"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1003:PreventDateTimeNowUseRule"")]
         DateFunc dateFunc = delegate () {{ return {0}; }};
         static void Main(string[] args)
         {{

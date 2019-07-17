@@ -121,7 +121,7 @@ namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         public MD5 test;
         static void Main(string[] args)
         {
@@ -136,7 +136,7 @@ namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         public MD5 test2 { get; set; }
         static void Main(string[] args)
         {
@@ -151,7 +151,7 @@ namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         static void Main(string[] args)
         {
             var test = MD5.Create();
@@ -170,7 +170,7 @@ namespace TestPreventMD5UseAnalyzer
         {
         }
 
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         public void test3(MD5 m)
         {
         }
@@ -184,7 +184,7 @@ namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         static void Main(string[] args)
         {
             test3(MD5.Create());
@@ -203,7 +203,7 @@ namespace TestPreventMD5UseAnalyzer
 {
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         Func<object> testFunc = () => MD5.Create();
         static void Main(string[] args)
         {
@@ -220,7 +220,7 @@ namespace TestPreventMD5UseAnalyzer
     public delegate MD5 MD5Func();
     class Program
     {
-        [SuppressMessage(""AWSSDKRules"", ""CR1000"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1000:PreventMD5UseRule"")]
         MD5Func md5Func = delegate () { return MD5.Create(); };
         static void Main(string[] args)
         {

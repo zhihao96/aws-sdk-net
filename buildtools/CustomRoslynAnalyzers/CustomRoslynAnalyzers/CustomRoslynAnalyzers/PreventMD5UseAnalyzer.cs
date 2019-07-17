@@ -99,7 +99,7 @@ namespace CustomRoslynAnalyzers
             var invocationExpr = (InvocationExpressionSyntax)context.Node;
             if (invocationExpr == null) return;
 
-            // memeberAccessExpr equals the expression before "(", which is HashAlgorithm.Create
+            // memeberAccessExpr equals the expression before "(", which is MD5
             var memberAccessExpr = invocationExpr.Expression as MemberAccessExpressionSyntax;
 
             if (memberAccessExpr == null) return;
@@ -156,7 +156,7 @@ namespace CustomRoslynAnalyzers
         }
 
 
-        // Find the Method and Class that declares the DateTime.Now or DateTime.Today
+        // Find the Method and Class that uees the MD5
         private string FindAncestors(SyntaxNode node)
         {
             var ancestors = node.Ancestors();

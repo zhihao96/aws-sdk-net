@@ -55,7 +55,7 @@ namespace CustomRoslynAnalyzers
         }
 
 
-        // Find the Method and Class that declares the DateTime.Now or DateTime.Today
+        // Find the Method and Class that use the HashAlgorithm.Create
         private string[] FindAncestors(IEnumerable<SyntaxNode> ancestors)
         {
             var result = new string[2] { "null", "null" };

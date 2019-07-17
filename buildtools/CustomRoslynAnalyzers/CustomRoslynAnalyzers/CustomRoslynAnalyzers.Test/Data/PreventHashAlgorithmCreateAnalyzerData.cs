@@ -131,7 +131,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         static void Main(string[] args)
         {{
             var test = {0};
@@ -147,7 +147,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         public HashAlgorithm test = {0};
         static void Main(string[] args)
         {{
@@ -163,7 +163,7 @@ namespace TestPreventHashAlgorithmCreateAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         static void Main(string[] args)
         {{
             TestMethod({0});
@@ -183,7 +183,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         public HashAlgorithm test4
         {{
             get
@@ -205,7 +205,7 @@ namespace TestPreventTimeNowUseAnalyzer
 {{
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         Func<int, int, HashAlgorithm> testForEquality = (x, y) => {0};
         static void Main(string[] args)
         {{
@@ -222,7 +222,7 @@ namespace TestPreventTimeNowUseAnalyzer
     public delegate HashAlgorithm HashAlgorithmFunc();
     class Program
     {{
-        [SuppressMessage(""AWSSDKRules"", ""CR1001"")]
+        [SuppressMessage(""AWSSDKRules"", ""CR1001:PreventHashAlgorithmCreateRule"")]
         HashAlgorithmFunc dateFunc = delegate () {{ return {0}; }};
         static void Main(string[] args)
         {{
