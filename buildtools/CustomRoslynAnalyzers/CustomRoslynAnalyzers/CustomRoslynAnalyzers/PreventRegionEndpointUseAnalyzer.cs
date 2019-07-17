@@ -39,7 +39,7 @@ namespace CustomRoslynAnalyzers
         {
             var memberAccessExpr = context.Node as MemberAccessExpressionSyntax;
             if (memberAccessExpr == null) return;
-            var memberSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol;
+            var memberSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IFieldSymbol;
             if (memberSymbol == null) return;
 
             var memberSymbolTypeName = memberSymbol.ContainingType.Name;
@@ -51,8 +51,8 @@ namespace CustomRoslynAnalyzers
                     var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "shouldn't usually", ExtraResolutionMessage);
                     context.ReportDiagnostic(diagnostic);
                 }
-                // To check if it is a member and not a method
-                else if (!memberSymbol.ToString().Contains("("))
+                // To check if it is a static readonly member except USEast1 and not a method
+                else if (memberSymbol.IsStatic && memberSymbol.IsReadOnly)
                 {
                     var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "should never", "");
                     context.ReportDiagnostic(diagnostic);
