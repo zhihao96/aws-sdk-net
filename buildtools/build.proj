@@ -63,7 +63,7 @@
       <ReferenceServiceDLLs>false</ReferenceServiceDLLs>
       <GeneratorPartialBuildArgument></GeneratorPartialBuildArgument>
     </PropertyGroup>
-    <Choose>
+    <!-- <Choose>
         <When Condition="'$(ServiceList)'==''">
             <PropertyGroup>
                 <FxCop35TargetFileName>SDK-3.5.FxCop</FxCop35TargetFileName>
@@ -78,7 +78,7 @@
                 <FxCop45TargetFileName>SDK-4.5.partial.FxCop</FxCop45TargetFileName>
             </PropertyGroup>
         </Otherwise>
-    </Choose>
+    </Choose> -->
 
     <Target Name="build-buildtools"
             DependsOnTargets="build-custom-tasks;build-test-wrapper;build-test-analyzer" />
@@ -113,7 +113,7 @@
         <Delete Files="$(TestAnalyzerAssembly)" />
     </Target>
 
-    <UsingTask TaskName="CustomTasks.UpdateFxCopProject" AssemblyFile="$(CustomTasksAssembly)"/>
+    <!-- <UsingTask TaskName="CustomTasks.UpdateFxCopProject" AssemblyFile="$(CustomTasksAssembly)"/> -->
     <UsingTask TaskName="CustomTasks.XamarinComponent" AssemblyFile="$(CustomTasksAssembly)"/>
     <UsingTask TaskName="CustomTasks.UnityPackage" AssemblyFile="$(CustomTasksAssembly)"/>
     <UsingTask TaskName="CustomTasks.UnityBuild" AssemblyFile="$(CustomTasksAssembly)"/>
@@ -560,22 +560,22 @@
 
     <!-- TEST TARGETS/TASKS -->
 
-    <Target Name="fxcop" DependsOnTargets="init;copy-assemblies" Condition="Exists('$(fxcopcmdexe)') And ($(Configuration) == 'Release')">
+    <!-- <Target Name="fxcop" DependsOnTargets="init;copy-assemblies" Condition="Exists('$(fxcopcmdexe)') And ($(Configuration) == 'Release')"> -->
         <!-- Update FxCop project files -->
-        <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net35" FxCopProject="..\sdk\SDK-3.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop35TargetFileName)" BinSuffix="net35" TargetServices="$(ServiceList)"/>
-        <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net45" FxCopProject="..\sdk\SDK-4.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop45TargetFileName)" BinSuffix="net45" TargetServices="$(ServiceList)"/>
+        <!-- <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net35" FxCopProject="..\sdk\SDK-3.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop35TargetFileName)" BinSuffix="net35" TargetServices="$(ServiceList)"/> -->
+        <!-- <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net45" FxCopProject="..\sdk\SDK-4.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop45TargetFileName)" BinSuffix="net45" TargetServices="$(ServiceList)"/> -->
 
         <!-- Compile custom FxCop rules -->
-        <MSBuild Projects="..\buildtools\CustomFxCopRules\CustomFxCopRules.sln"
-            Targets="Clean;Build"
-            Properties="Configuration=Release" />
+        <!-- <MSBuild Projects="..\buildtools\CustomFxCopRules\CustomFxCopRules.sln" -->
+            <!-- Targets="Clean;Build" -->
+            <!-- Properties="Configuration=Release" /> -->
 
         <!-- Run FxCop -->
-        <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop35TargetFileName) /o:..\fxcop-report-3.5.xml /s"/>
-        <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop45TargetFileName) /o:..\fxcop-report-4.5.xml /s"/>
+        <!-- <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop35TargetFileName) /o:..\fxcop-report-3.5.xml /s"/> -->
+        <!-- <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop45TargetFileName) /o:..\fxcop-report-4.5.xml /s"/> -->
 
-        <Error Condition="Exists('..\fxcop-report-3.5.xml') or Exists('..\fxcop-report-4.5.xml')" Text="There are FxCop violations!" />
-    </Target>
+        <!-- <Error Condition="Exists('..\fxcop-report-3.5.xml') or Exists('..\fxcop-report-4.5.xml')" Text="There are FxCop violations!" /> -->
+    <!-- </Target> -->
 
     <UsingTask TaskName="PrepareTestResults" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
         <ParameterGroup>
