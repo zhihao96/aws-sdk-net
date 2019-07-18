@@ -22,11 +22,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
-    <Analyzer Include= "..\..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
+    <Analyzer Include= "..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="../Services/*/UnitTests/**/*.cs"/>

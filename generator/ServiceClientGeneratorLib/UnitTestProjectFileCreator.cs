@@ -69,15 +69,15 @@ namespace ServiceClientGenerator
                     PackageReferences      = configuration.PackageReferences,
                     SupressWarnings        = configuration.NoWarn,
                     OutputPathOverride     = configuration.OutputPathOverride,
-                    SignBinaries           = false,
-                    FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset",
-                    CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll"
+                    SignBinaries           = false
                 };
                 if (_isLegacyProj)
                 {
                     projectProperties.AssemblyName = string.Format("AWSSDK.UnitTests.{0}", configuration.Name);
                     projectProperties.IndividualFileIncludes = new List<string> { "../Services/*/UnitTests/**/*.cs" };
                     projectProperties.EmbeddedResources = configuration.EmbeddedResources;
+                    projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
                 }
                 else
                 {
@@ -88,6 +88,8 @@ namespace ServiceClientGenerator
                     {
                         projectProperties.EmbeddedResources = new List<string> { Path.Combine("Custom", "EmbeddedResource", "*") };
                     }
+                    projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
                 }
                                 
                 if (serviceProjectReferences != null)
