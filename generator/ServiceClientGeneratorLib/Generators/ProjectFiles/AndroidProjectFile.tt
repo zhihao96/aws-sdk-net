@@ -26,9 +26,12 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-
+  
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
+	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePath#></CodeAnalysisRuleSet>
+  </PropertyGroup>
   <PropertyGroup>
-    <CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetDirectory#></CodeAnalysisRuleSet>
+	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePathForBuild#></CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -46,7 +46,7 @@ namespace CustomRoslynAnalyzers
             {
                 if (m.Text.Equals("static"))
                 {
-                    var fieldSymbol = (INamedTypeSymbol)context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol;
+                    var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
                     if (fieldSymbol != null && ImplementsILogger(fieldSymbol))
                     {
                         var findAncestorsResult = FindAncestors(context.Node.Ancestors());

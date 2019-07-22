@@ -26,8 +26,11 @@
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
+	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePath#></CodeAnalysisRuleSet>
+  </PropertyGroup>
   <PropertyGroup>
-    <CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetDirectory#></CodeAnalysisRuleSet>
+	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePathForBuild#></CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -71,7 +71,8 @@ namespace ServiceClientGenerator
                     projectProperties.KeyFilePath = @"..\..\awssdk.dll.snk";
                     projectProperties.SupressWarnings = "419,1570,1591";
                     projectProperties.NugetPackagesLocation = @"..\..\packages\";
-                    projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\AWSDotNetSDKForBuild.ruleset";
                     projectProperties.TargetFrameworks = projectFileConfiguration.TargetFrameworkVersions;
                     projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                     projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
@@ -170,7 +171,8 @@ namespace ServiceClientGenerator
                 projectProperties.AssemblyName = assemblyName;
                 projectProperties.SourceDirectories = GetProjectSourceFolders(projectFileConfiguration, serviceFilesRoot);
                 projectProperties.NugetPackagesLocation = @"..\..\..\packages\";
-                projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\..\AWSDotNetSDK.ruleset";
+                projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\..\AWSDotNetSDK.ruleset";
+                projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\..\AWSDotNetSDKForBuild.ruleset";
                 projectProperties.TargetFrameworks = projectFileConfiguration.TargetFrameworkVersions;
                 projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                 projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
@@ -279,7 +281,8 @@ namespace ServiceClientGenerator
             projectProperties.SupressWarnings       = projectFileConfiguration.NoWarn;
             projectProperties.SignBinaries          = true;
             projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
-            projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\..\AWSDotNetSDK.ruleset";
+            projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\..\AWSDotNetSDK.ruleset";
+            projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\..\AWSDotNetSDKForBuild.ruleset";
             projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
 
             List<Dependency> dependencies;

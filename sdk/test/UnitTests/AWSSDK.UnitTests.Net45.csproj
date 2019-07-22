@@ -19,13 +19,13 @@
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
     <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\AWSDotNetSDKForBuild.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 
-  <ItemGroup>
-    <Analyzer Include= "..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="../Services/*/UnitTests/**/*.cs"/>
   </ItemGroup>

@@ -16,9 +16,12 @@
 using System.Diagnostics.CodeAnalysis;
 
 // Don't reference RegionEndpoints in the SDK unless absolutely necessary.
-[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.AssumeRoleAWSCredentials.#.ctor(Amazon.Runtime.AWSCredentials,System.String,System.String,Amazon.Runtime.AssumeRoleAWSCredentialsOptions)")]
-[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.FederatedAWSCredentials.#.cctor()")]
-[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.StoredProfileFederatedCredentials.#.ctor(System.String,System.String,System.Net.WebProxy)")]
+// [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.AssumeRoleAWSCredentials.#.ctor(Amazon.Runtime.AWSCredentials,System.String,System.String,Amazon.Runtime.AssumeRoleAWSCredentialsOptions)")]
+[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.AssumeRoleAWSCredentials.DefaultSTSClientRegion")]
+// [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Justification = "<Pending>", Scope = "member", Target = "Amazon.Runtime.FederatedAWSCredentials.#.cctor()")]
+[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.FederatedAWSCredentials.DefaultSTSClientRegion")]
+// [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.StoredProfileFederatedCredentials.#.ctor(System.String,System.String,System.Net.WebProxy)")]
+[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.StoredProfileFederatedCredentials.DefaultSTSClientRegion")]
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Runtime.Internal.Util.S3Uri.#.ctor(System.Uri)")]
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.Util.AWSSDKUtils.#DetermineRegion(System.String)")]
 

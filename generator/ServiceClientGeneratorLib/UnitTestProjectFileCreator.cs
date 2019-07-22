@@ -76,8 +76,8 @@ namespace ServiceClientGenerator
                     projectProperties.AssemblyName = string.Format("AWSSDK.UnitTests.{0}", configuration.Name);
                     projectProperties.IndividualFileIncludes = new List<string> { "../Services/*/UnitTests/**/*.cs" };
                     projectProperties.EmbeddedResources = configuration.EmbeddedResources;
-                    projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\AWSDotNetSDK.ruleset";
-                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
+                    projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\AWSDotNetSDKForBuild.ruleset";
                 }
                 else
                 {
@@ -88,8 +88,8 @@ namespace ServiceClientGenerator
                     {
                         projectProperties.EmbeddedResources = new List<string> { Path.Combine("Custom", "EmbeddedResource", "*") };
                     }
-                    projectProperties.FxcopAnalyzerRuleSetDirectory = @"..\..\..\..\AWSDotNetSDK.ruleset";
-                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
+                    projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\..\..\AWSDotNetSDK.ruleset";
+                    projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\..\..\AWSDotNetSDKForBuild.ruleset";
                 }
                                 
                 if (serviceProjectReferences != null)

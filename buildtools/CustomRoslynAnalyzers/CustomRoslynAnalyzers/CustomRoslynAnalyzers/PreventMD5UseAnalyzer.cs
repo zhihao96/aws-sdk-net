@@ -52,7 +52,7 @@ namespace CustomRoslynAnalyzers
             if (fieldDeclaration == null)
                 return;
 
-            var fieldSymbol = (INamedTypeSymbol)context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol;
+            var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
             if (fieldSymbol != null)
             {
                 // Check for Lambda expression's type
@@ -124,7 +124,7 @@ namespace CustomRoslynAnalyzers
                     var argumentNameSyntax = argument as IdentifierNameSyntax;
                     if (argumentNameSyntax != null && argumentNameSyntax.Identifier.Text.Equals("MD5"))
                     {
-                        var argumentSymbol = (INamedTypeSymbol)context.SemanticModel.GetSymbolInfo(argument).Symbol;
+                        var argumentSymbol = context.SemanticModel.GetSymbolInfo(argument).Symbol as INamedTypeSymbol;
                         CheckType(argumentSymbol, context, argument.GetLocation());
                     }
                 }
