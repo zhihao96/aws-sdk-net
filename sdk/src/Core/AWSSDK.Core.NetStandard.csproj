@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
     <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">
     <CodeAnalysisRuleSet>..\..\AWSDotNetSDKForBuild.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
