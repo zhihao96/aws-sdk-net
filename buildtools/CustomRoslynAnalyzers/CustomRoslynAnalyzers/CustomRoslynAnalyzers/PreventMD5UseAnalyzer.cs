@@ -38,8 +38,7 @@ namespace CustomRoslynAnalyzers
         private void AnalyzePropertyNode(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-            if (propertyDeclaration == null)
-                return;
+            if (propertyDeclaration == null) return;
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol != null)
                 CheckType(propertySymbol.Type, context, propertyDeclaration.Type.GetLocation());
@@ -49,9 +48,7 @@ namespace CustomRoslynAnalyzers
         private void AnalyzeFieldNode(SyntaxNodeAnalysisContext context)
         {
             var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-            if (fieldDeclaration == null)
-                return;
-
+            if (fieldDeclaration == null) return;
             var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
             if (fieldSymbol != null)
             {
@@ -101,10 +98,8 @@ namespace CustomRoslynAnalyzers
 
             // memeberAccessExpr equals the expression before "(", which is MD5
             var memberAccessExpr = invocationExpr.Expression as MemberAccessExpressionSyntax;
-
             if (memberAccessExpr == null) return;
-            var memberAccessExprName = memberAccessExpr.Name.ToString();
-            if (memberAccessExprName == "Create")
+            if (memberAccessExpr.Name.ToString() == "Create")
             {
                 var memberSymbol = context.SemanticModel.GetSymbolInfo(memberAccessExpr).Symbol;
                 if (memberSymbol == null) return;
@@ -122,7 +117,7 @@ namespace CustomRoslynAnalyzers
                 foreach (var argument in genericTypeofLambdaFunc.TypeArgumentList.Arguments)
                 {
                     var argumentNameSyntax = argument as IdentifierNameSyntax;
-                    if (argumentNameSyntax != null && argumentNameSyntax.Identifier.Text.Equals("MD5"))
+                    if (argumentNameSyntax?.Identifier.Text == "MD5")
                     {
                         var argumentSymbol = context.SemanticModel.GetSymbolInfo(argument).Symbol as INamedTypeSymbol;
                         CheckType(argumentSymbol, context, argument.GetLocation());
@@ -149,8 +144,7 @@ namespace CustomRoslynAnalyzers
                 return true;
 
             var baseType = type.BaseType;
-            if (baseType == null)
-                return false;
+            if (baseType == null) return false;
 
             return IsAssignableTo(baseType);
         }
@@ -183,7 +177,7 @@ namespace CustomRoslynAnalyzers
                     return methodDeclarationSyntax.Identifier.Text;
                 }
             }
-            return "null";
+            return "";
         }
     }
 }

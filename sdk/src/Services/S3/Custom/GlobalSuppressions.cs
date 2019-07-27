@@ -22,8 +22,8 @@ using System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.AmazonS3Util.#PostUpload(Amazon.S3.Util.S3PostUploadRequest)")]
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.BucketRegionDetector.#GetUsEast1ClientFromCredentials(Amazon.Runtime.ImmutableCredentials)")]
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.BucketRegionDetector.#GetUsEast1ClientFromCredentials(Amazon.Runtime.ImmutableCredentials)")]
-// [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.S3PostUploadRequest.#.ctor()")]
-[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.S3PostUploadRequest._region")]
+[module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.S3PostUploadRequest.#.ctor()")]
+ [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.Util.S3PostUploadRequest._region")]
 [module: SuppressMessage("AwsSdkRules", "CR1004:PreventRegionEndpointUseRule", Scope = "member", Target = "Amazon.S3.AmazonS3Client.#GetPreSignedURLInternal(Amazon.S3.Model.GetPreSignedUrlRequest,System.Boolean)")]
 
 // Suppressions for empty response types

@@ -43,13 +43,11 @@ namespace CustomRoslynAnalyzers
                 || memberAccessExprName == nameof(DateTime.Today))
             {
                 var memberSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol;
-                if (memberSymbol == null) return;
                 // check the method is a member of the class DateTime
-                var memberSymbolSpecialType = memberSymbol.ContainingType.SpecialType;
-                if (memberSymbolSpecialType == SpecialType.System_DateTime)
+                if (memberSymbol?.ContainingType.SpecialType == SpecialType.System_DateTime)
                 {
                     var result = FindAncestors(context.Node.Ancestors());
-                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), result[0], result[1], "System.DateTime." + memberAccessExprName);
+                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), result[0] ?? "null", result[1], "System.DateTime." + memberAccessExprName);
                     context.ReportDiagnostic(diagnostic);
                 }
             }
@@ -58,7 +56,7 @@ namespace CustomRoslynAnalyzers
         // Find the Method and Class that declares the DateTime.Now or DateTime.Today
         private string[] FindAncestors(IEnumerable<SyntaxNode> ancestors)
         {
-            var result = new string[2] { "null", "null"};
+            var result = new string[2];
             foreach (var ancestor in ancestors)
             {
                 var type = ancestor.GetType();

@@ -37,12 +37,10 @@ namespace CustomRoslynAnalyzers
         private void AnalyzeFieldNode(SyntaxNodeAnalysisContext context)
         {
             var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-            if (fieldDeclaration == null)
-                return;
+            if (fieldDeclaration == null) return;
 
             // Check the modifiers of the node contains static
-            var fieldModifiers = fieldDeclaration.Modifiers;
-            foreach (var m in fieldModifiers)
+            foreach (var m in fieldDeclaration.Modifiers)
             {
                 if (m.Text.Equals("static"))
                 {
@@ -61,8 +59,7 @@ namespace CustomRoslynAnalyzers
         private void AnalyzePropertyNode(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-            if (propertyDeclaration == null)
-                return;
+            if (propertyDeclaration == null) return;
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol != null
                 && propertySymbol.IsStatic
@@ -75,27 +72,22 @@ namespace CustomRoslynAnalyzers
             }
         }
 
-        //private const string LoggerInterfaceFullName = "Amazon.Runtime.Internal.Util.ILogger";
         private const string LoggerInterfaceFullName = "ILogger";
-
         private bool ImplementsILogger(ITypeSymbol typeSymbol)
         {
-            if (typeSymbol == null)
-                return false;
+            if (typeSymbol == null) return false;
 
             // check if type is ILogger
-            if (IsILogger(typeSymbol.Name))
-                return true;
+            if (IsILogger(typeSymbol.Name)) return true;
 
             // check if type implements ILogger
             var interfaces = typeSymbol.Interfaces;
             var implementsInterface = interfaces.Any(i => IsILogger(i.Name));
-            if (implementsInterface)
-                return true;
+            if (implementsInterface) return true;
 
             // check base class
-            if (ImplementsILogger(typeSymbol.BaseType))
-                return true;
+            if (ImplementsILogger(typeSymbol.BaseType)) return true;
+
             return false;
         }
 

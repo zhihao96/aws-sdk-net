@@ -13,7 +13,7 @@ namespace CustomRoslynAnalyzers.Test
 {
     public class PreventRegionEndpointUseAnalyzerTests : CodeFixVerifier
     {
-        private const string USEast1ResolutionMessage = " Evaluate whether this usage is safe and add a suppression if it is.";
+        private const string USEast1ResolutionMessage = "Evaluate whether this usage is safe and add a suppression if it is.";
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {

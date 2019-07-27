@@ -38,17 +38,14 @@ namespace CustomRoslynAnalyzers
 
             // memeberAccessExpr equals the expression before "(", which is HashAlgorithm.Create
             var memberAccessExpr = invocationExpr.Expression as MemberAccessExpressionSyntax;
-            if (memberAccessExpr == null) return;
-            var memberAccessExprName = memberAccessExpr.Name.ToString();
-            if (memberAccessExprName == "Create")
+            if (memberAccessExpr?.Name.ToString() == "Create")
             {
                 var memberSymbol = context.SemanticModel.GetSymbolInfo(memberAccessExpr).Symbol as IMethodSymbol;
-
-                if (memberSymbol != null && (memberSymbol.ReturnType.ToString() == "HashAlgorithm"
-                    || memberSymbol.ReturnType.ToString() == "System.Security.Cryptography.HashAlgorithm"))
+                var returnType = memberSymbol?.ReturnType.ToString();
+                if (returnType == "HashAlgorithm" || returnType == "System.Security.Cryptography.HashAlgorithm")
                 {
                     var result = FindAncestors(context.Node.Ancestors());
-                    var diagnostic = Diagnostic.Create(Rule, invocationExpr.GetLocation(), result[0], result[1], "System.Security.Cryptography." + invocationExpr.ToString());
+                    var diagnostic = Diagnostic.Create(Rule, invocationExpr.GetLocation(), result[0] ?? "null", result[1], "System.Security.Cryptography." + invocationExpr.ToString());
                     context.ReportDiagnostic(diagnostic);
                 }
             }
@@ -58,7 +55,7 @@ namespace CustomRoslynAnalyzers
         // Find the Method and Class that use the HashAlgorithm.Create
         private string[] FindAncestors(IEnumerable<SyntaxNode> ancestors)
         {
-            var result = new string[2] { "null", "null" };
+            var result = new string[2];
             foreach (var ancestor in ancestors)
             {
                 var type = ancestor.GetType();

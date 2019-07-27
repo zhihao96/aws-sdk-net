@@ -103,7 +103,7 @@ namespace TestHelper
         /// <param name="expectedResults">Diagnostic Results that should have appeared in the code</param>
         private static void VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expectedResults)
         {
-            int expectedCount = expectedResults.Count();
+            int expectedCount = expectedResults.Length;
             int actualCount = actualResults.Count();
 
             if (expectedCount != actualCount)
@@ -124,7 +124,7 @@ namespace TestHelper
                     if (actual.Location != Location.None)
                     {
                         Assert.IsTrue(false,
-                            string.Format("Expected:\nA project diagnostic with No location\nActual:\n{0}",
+                            string.Format("Expected:\r\nA project diagnostic with No location\r\nActual:\r\n{0}",
                             FormatDiagnostics(analyzer, actual)));
                     }
                 }

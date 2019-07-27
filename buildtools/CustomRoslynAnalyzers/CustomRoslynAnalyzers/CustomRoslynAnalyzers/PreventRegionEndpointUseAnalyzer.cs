@@ -12,11 +12,11 @@ namespace CustomRoslynAnalyzers
     public class PreventRegionEndpointUseAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not use static readonly RegionEndpoint members from within the SDK.";
-        public const string MessageFormat = "Target member uses {0}. This member {1} be used within the SDK.{2}";
+        public const string MessageFormat = "Target member uses {0}. This member {1} be used within the SDK. {2}";
         private const string Category = "AwsSdkRules";
         private const string Description = "Makes sure none of the static readonly RegionEndpoint members are used directly within the SDK itself.";
 
-        private const string ExtraResolutionMessage = " Evaluate whether this usage is safe and add a suppression if it is.";
+        private const string ExtraResolutionMessage = "Evaluate whether this usage is safe and add a suppression if it is.";
         private const string RegionEndpointTypeName = "RegionEndpoint";
         private const string USEast1EndpointName = "USEast1";
 
@@ -43,7 +43,7 @@ namespace CustomRoslynAnalyzers
             if (memberSymbol == null) return;
 
             var memberSymbolTypeName = memberSymbol.ContainingType.Name;
-            if (memberSymbolTypeName != null && memberSymbolTypeName.Equals(RegionEndpointTypeName))
+            if (memberSymbolTypeName?.ToString() == RegionEndpointTypeName)
             {
                 var memberAccessExpressionString = memberAccessExpr.ToString();
                 if (memberAccessExpressionString.EndsWith(USEast1EndpointName))

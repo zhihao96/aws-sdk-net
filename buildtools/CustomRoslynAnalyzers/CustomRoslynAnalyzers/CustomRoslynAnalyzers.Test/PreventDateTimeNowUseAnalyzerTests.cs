@@ -19,7 +19,7 @@ namespace CustomRoslynAnalyzers.Test
         }
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new PreventDateTimeNowUseAnalyzerCodeFIx();
+            return new PreventDateTimeNowUseAnalyzerCodeFix();
         }
 
         [Theory]
