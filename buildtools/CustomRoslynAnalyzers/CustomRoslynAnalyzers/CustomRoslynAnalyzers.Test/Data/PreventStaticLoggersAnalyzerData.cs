@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomRoslynAnalyzers.Test.Data
+namespace CustomRoslynAnalyzers.Test
 {
-    class PreventStaticLoggersAnalyzerData
+    public partial class PreventStaticLoggersAnalyzerTests
     {
         private const string BasicDataForImplementILogger = @"
     public class Logger : ILogger
     {
         public void Debug(Exception exception, string messageFormat, params object[] args)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void DebugFormat(string messageFormat, params object[] args)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void Error(Exception exception, string messageFormat, params object[] args)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void Flush()
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void InfoFormat(string messageFormat, params object[] args)
         {
-            throw new NotImplementedException();
+            return;
         }
     }";
 
@@ -42,7 +42,6 @@ using Amazon.Runtime.Internal.Util;
 
 namespace TestPreventStaticLoggersAnalyzer
 {{
-    {0}
     class Program
     {{
         public static Logger B;  
@@ -50,6 +49,7 @@ namespace TestPreventStaticLoggersAnalyzer
         {{
         }}
     }}
+    {0}
 }}";
         private const string BasicPropertyDataWithoutLogger = @"
 using System;
@@ -58,7 +58,6 @@ using Amazon.Runtime.Internal.Util;
 
 namespace TestPreventStaticLoggersAnalyzer
 {{
-    {0}
     class Program
     {{
         public static Logger A {{ set; get; }}
@@ -66,6 +65,7 @@ namespace TestPreventStaticLoggersAnalyzer
         {{
         }}
     }}
+    {0}
 }}";
 
         private const string FieldCodeFixDataWithoutLogger = @"
@@ -75,7 +75,6 @@ using Amazon.Runtime.Internal.Util;
 
 namespace TestPreventStaticLoggersAnalyzer
 {{
-    {0}
     class Program
     {{
         [SuppressMessage(""AWSSDKRules"", ""CR1002"")]
@@ -84,6 +83,7 @@ namespace TestPreventStaticLoggersAnalyzer
         {{
         }}
     }}
+    {0}
 }}";
         private const string PropertyCodeFixDataWithoutLogger = @"
 using System;
@@ -92,7 +92,6 @@ using Amazon.Runtime.Internal.Util;
 
 namespace TestPreventStaticLoggersAnalyzer
 {{
-    {0}
     class Program
     {{
         [SuppressMessage(""AWSSDKRules"", ""CR1002"")]
@@ -101,6 +100,7 @@ namespace TestPreventStaticLoggersAnalyzer
         {{
         }}
     }}
+    {0}
 }}";
 
         public static IEnumerable<object[]> AllTestData => CreateSeperateData();
@@ -110,9 +110,9 @@ namespace TestPreventStaticLoggersAnalyzer
             return new List<object[]>
             {
                 // Data for the field test
-                new object[] { BasicFieldDataWithoutLogger, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger", 38, 9, FieldCodeFixDataWithoutLogger, BasicDataForImplementILogger},
+                new object[] { BasicFieldDataWithoutLogger, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger", 10, 9, FieldCodeFixDataWithoutLogger, BasicDataForImplementILogger},
                 // Data for the property test
-                new object[] { BasicPropertyDataWithoutLogger, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger", 38, 9, PropertyCodeFixDataWithoutLogger, BasicDataForImplementILogger},
+                new object[] { BasicPropertyDataWithoutLogger, "Program", "TestPreventStaticLoggersAnalyzer.Logger", "ILogger", 10, 9, PropertyCodeFixDataWithoutLogger, BasicDataForImplementILogger},
             };
         }
     }

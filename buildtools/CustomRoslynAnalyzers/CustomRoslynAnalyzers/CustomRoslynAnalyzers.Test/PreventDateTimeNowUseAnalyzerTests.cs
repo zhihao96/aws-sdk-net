@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using TestHelper;
+using CustomRoslynAnalyzers.Test.TestHelper;
 using Xunit;
-using CustomRoslynAnalyzers.Test.Data;
 using CustomRoslynAnalyzers.CodeFix;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventDateTimeNowUseAnalyzerTests : CodeFixVerifier
+    public partial class PreventDateTimeNowUseAnalyzerTests : CodeFixVerifier
     {
+        private const string MessageFormat = "Method {0} of member {1} gets {2}. This property should not be used within the SDK, and instead AWSSDKUtils.CorrectedNow or AWSSDKUtils.CorrectedUtcNow should be used.";
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new PreventDateTimeNowUseAnalyzer();
@@ -23,7 +23,7 @@ namespace CustomRoslynAnalyzers.Test
         }
 
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestCorrectData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestCorrectData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeNowUseAnalyzer_Correct_Test(string data)
         {
             var expected = new DiagnosticResult[0];
@@ -32,7 +32,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Today and DateTime.Now and DateTime.UtcNow in methods
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestMethodData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestMethodData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Methods_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -42,7 +42,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in field
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestFieldData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestFieldData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Field_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -52,7 +52,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestPassInParameterData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestPassInParameterData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Parameter_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -62,7 +62,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in parameter
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestPropertyData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestPropertyData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Property_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -72,7 +72,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Lambda expressions
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestLambdaData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestLambdaData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Lambda_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -82,7 +82,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for DateTime.Use and DateTime.Now and DateTime.UtcNow in Delegate expressions
         [Theory]
-        [MemberData(nameof(PreventDateTimeNowUseAnalyzerData.TestDelegateData), MemberType = typeof(PreventDateTimeNowUseAnalyzerData))]
+        [MemberData(nameof(TestDelegateData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeUseAnalyzer_Delegate_Tests(string data, string attribute, string codeFixData)
         {
             var testData = string.Format(data, attribute);
@@ -96,7 +96,7 @@ namespace CustomRoslynAnalyzers.Test
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventDateTimeNowUseRuleId,
-                Message = string.Format(PreventDateTimeNowUseAnalyzer.MessageFormat, method, className, "System." + dateTimeAttribute),
+                Message = string.Format(MessageFormat, method, className, "System." + dateTimeAttribute),
                 Severity = DiagnosticSeverity.Error,
                 Locations =
                     new[]

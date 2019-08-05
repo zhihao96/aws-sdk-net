@@ -3,16 +3,16 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TestHelper;
+using CustomRoslynAnalyzers.Test.TestHelper;
 using Xunit;
-using CustomRoslynAnalyzers.Test.Data;
 using Microsoft.CodeAnalysis.CodeFixes;
 using CustomRoslynAnalyzers.CodeFix;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventHashAlgorithmCreateAnalyzerTests : CodeFixVerifier
+    public partial class PreventHashAlgorithmCreateAnalyzerTests : CodeFixVerifier
     {
+        private const string MessageFormat = "Method {0} of member {1} invokes {2}. This method should not be used within the SDK, as it may lead to MD5 use, which is not FIPS compliant.";
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new PreventHashAlgorithmCreateAnalyzer();
@@ -24,7 +24,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Correct Case Test
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestCorrectData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestCorrectData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyzer_Correct_Test(string data)
         {
             var expected = new DiagnosticResult[0];
@@ -33,7 +33,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in method
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestMethodData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestMethodData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyzer_Method_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -43,7 +43,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in field
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestFieldData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestFieldData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Field_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -53,7 +53,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in Property
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestPropertyData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestPropertyData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Property_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -63,7 +63,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in Parameter
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestPassInParameterData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestPassInParameterData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Parameter_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -73,7 +73,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in Lambda Expression
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestLambdaData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestLambdaData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Lambda_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -83,7 +83,7 @@ namespace CustomRoslynAnalyzers.Test
 
         // A Test for HashAlgorithm.Create() in Delegate
         [Theory]
-        [MemberData(nameof(PreventHashAlgorithmCreateAnalyzerData.TestDelegateData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerData))]
+        [MemberData(nameof(TestDelegateData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyze_Delegate_Test(string data, string invocation, string codeFixData)
         {
             var testData = string.Format(data, invocation);
@@ -97,7 +97,7 @@ namespace CustomRoslynAnalyzers.Test
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventHashAlgorithmCreateRuleId,
-                Message = string.Format(PreventHashAlgorithmCreateAnalyzer.MessageFormat, methodName, className, "System.Security.Cryptography." + invocation),
+                Message = string.Format(MessageFormat, methodName, className, "System.Security.Cryptography." + invocation),
                 Severity = DiagnosticSeverity.Error,
                 Locations =
                     new[]

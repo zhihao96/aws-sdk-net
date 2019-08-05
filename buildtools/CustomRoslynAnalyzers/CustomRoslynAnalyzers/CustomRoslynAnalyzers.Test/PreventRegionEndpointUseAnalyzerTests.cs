@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using TestHelper;
+using CustomRoslynAnalyzers.Test.TestHelper;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using CustomRoslynAnalyzers.CodeFix;
-using CustomRoslynAnalyzers.Test.Data;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventRegionEndpointUseAnalyzerTests : CodeFixVerifier
+    public partial class PreventRegionEndpointUseAnalyzerTests : CodeFixVerifier
     {
+        private const string MessageFormat = "Target member uses {0}. This member {1} be used within the SDK. {2}";
         private const string USEast1ResolutionMessage = "Evaluate whether this usage is safe and add a suppression if it is.";
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
@@ -44,13 +44,13 @@ namespace TestPreventRegionEndpointUseAnalyzer
 
         // A test for all of the senarios including Field, Property, InsideMethod, Declare Method, PassIn Parameter to Method, Lambda Expression, Delegate
         [Theory]
-        [MemberData(nameof(PreventRegionEndpointUseAnalyzerData.TestInsideMethodData), MemberType = typeof(PreventRegionEndpointUseAnalyzerData))]
+        [MemberData(nameof(TestInsideMethodData), MemberType = typeof(PreventRegionEndpointUseAnalyzerTests))]
         public void CR1004_PreventRegionEndpointUseAnalyzer_Multiple_Tests(string data, int row, int column, string codeFixData)
         {
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventRegionEndpointUseRuleId,
-                Message = string.Format(PreventRegionEndpointUseAnalyzer.MessageFormat, "RegionEndpoint.USEast1", "shouldn't usually", USEast1ResolutionMessage),
+                Message = string.Format(MessageFormat, "RegionEndpoint.USEast1", "shouldn't usually", USEast1ResolutionMessage),
                 Severity = DiagnosticSeverity.Error,
                 Locations =
                     new[]
@@ -58,6 +58,11 @@ namespace TestPreventRegionEndpointUseAnalyzer
                         new DiagnosticResultLocation("Test0.cs", row, column)
                     }
             };
+            if (!data.Contains("USEast1"))
+            {
+                expected.Message = string.Format(MessageFormat, "RegionEndpoint.USWest1", "should never", USEast1ResolutionMessage);
+            }
+            
             VerifyCSharpDiagnostic(data, expected);
             VerifyCSharpFix(data, codeFixData);
         }

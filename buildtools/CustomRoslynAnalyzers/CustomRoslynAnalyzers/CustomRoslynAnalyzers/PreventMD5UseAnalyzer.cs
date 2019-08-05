@@ -12,9 +12,11 @@ namespace CustomRoslynAnalyzers
     public class PreventMD5UseAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not use MD5";
-        public const string MessageFormat = "Type {0} of member {1} is a subclass of MD5. MD5 should not be used within the SDK, as it is not FIPS compliant.";
+        private const string MessageFormat = "Type {0} of member {1} is a subclass of MD5. MD5 should not be used within the SDK, as it is not FIPS compliant.";
         private const string Category = "AwsSdkRules";
         private const string Description = "Checks code for MD5 uses.";
+        private const string MD5FullName = "System.Security.Cryptography.MD5";
+        private const string MD5ShortName = "MD5";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.PreventMD5UseRuleId,
             Title,
@@ -38,24 +40,34 @@ namespace CustomRoslynAnalyzers
         private void AnalyzePropertyNode(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-            if (propertyDeclaration == null) return;
+            if (propertyDeclaration == null)
+            {
+                return;
+            }
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol != null)
+            {
                 CheckType(propertySymbol.Type, context, propertyDeclaration.Type.GetLocation());
+            }
         }
 
         // Analyze the Field Declaration
         private void AnalyzeFieldNode(SyntaxNodeAnalysisContext context)
         {
             var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-            if (fieldDeclaration == null) return;
+            if (fieldDeclaration == null)
+            {
+                return;
+            }
             var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
             if (fieldSymbol != null)
             {
                 // Check for Lambda expression's type
                 var genericTypeofLambdaFunc = fieldDeclaration.Declaration.Type as GenericNameSyntax;
                 if (genericTypeofLambdaFunc != null)
+                {
                     AnalyzeLambdaExpressionType(context, genericTypeofLambdaFunc);
+                }
                 // Check for the rest of field symbol
                 CheckType(fieldSymbol, context, fieldDeclaration.GetLocation());
             } 
@@ -71,7 +83,9 @@ namespace CustomRoslynAnalyzers
             {
                 var typeSymbol = context.SemanticModel.GetSymbolInfo(parameter.Type).Symbol as INamedTypeSymbol;
                 if (typeSymbol != null)
+                {
                     CheckType(typeSymbol, context, parameter.GetLocation());
+                }
             }
             // Analyze the method body
             if (methodDeclaration.Body != null)
@@ -84,7 +98,9 @@ namespace CustomRoslynAnalyzers
                     {
                         var typeSymbol = context.SemanticModel.GetSymbolInfo(localDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
                         if (typeSymbol != null && !localDeclaration.Declaration.Type.ToString().Equals("var"))
+                        {
                             CheckType(typeSymbol, context, localDeclaration.Declaration.Type.GetLocation());
+                        }
                     }
                 }
             }
@@ -93,19 +109,25 @@ namespace CustomRoslynAnalyzers
         // Analyze the extra senario - Invocation Expression 
         private void AnalyzeInvocationExpressionNode(SyntaxNodeAnalysisContext context)
         {
-            var invocationExpr = (InvocationExpressionSyntax)context.Node;
-            if (invocationExpr == null) return;
-
+            var invocationExpr = context.Node as InvocationExpressionSyntax;
             // memeberAccessExpr equals the expression before "(", which is MD5
-            var memberAccessExpr = invocationExpr.Expression as MemberAccessExpressionSyntax;
-            if (memberAccessExpr == null) return;
+            var memberAccessExpr = invocationExpr?.Expression as MemberAccessExpressionSyntax;
+            if (memberAccessExpr == null)
+            {
+                return;
+            }
             if (memberAccessExpr.Name.ToString() == "Create")
             {
                 var memberSymbol = context.SemanticModel.GetSymbolInfo(memberAccessExpr).Symbol;
-                if (memberSymbol == null) return;
+                if (memberSymbol == null)
+                {
+                    return;
+                }
                 var memberSymbolSpecialType = memberSymbol.ContainingType;
                 if (memberSymbolSpecialType != null)
+                {
                     CheckType(memberSymbolSpecialType, context, invocationExpr.GetLocation());
+                }
             }
         }
 
@@ -126,11 +148,9 @@ namespace CustomRoslynAnalyzers
             }
         }
 
-        private const string MD5FullName = "System.Security.Cryptography.MD5";
-        private const string MD5ShortName = "MD5";
         private void CheckType(ITypeSymbol type, SyntaxNodeAnalysisContext context, Location location)
         {
-            if (IsAssignableTo(type))
+            if (IsAssignableToMD5(type))
             {
                 var returnResult = FindAncestors(context.Node);
                 var diagnostic = Diagnostic.Create(Rule, location, type.ToString(), returnResult);
@@ -138,15 +158,20 @@ namespace CustomRoslynAnalyzers
             }
         }
 
-        private bool IsAssignableTo(ITypeSymbol type)
+        private bool IsAssignableToMD5(ITypeSymbol type)
         {
             if (string.Equals(type.Name, MD5FullName) || string.Equals(type.Name, MD5ShortName))
+            {
                 return true;
+            }
 
             var baseType = type.BaseType;
-            if (baseType == null) return false;
+            if (baseType == null)
+            {
+                return false;
+            }
 
-            return IsAssignableTo(baseType);
+            return IsAssignableToMD5(baseType);
         }
 
 

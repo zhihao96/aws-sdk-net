@@ -13,9 +13,10 @@ namespace CustomRoslynAnalyzers
     public class PreventStaticLoggersAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not store ILogger instances in static members.";
-        public const string MessageFormat = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
+        private const string MessageFormat = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
         private const string Category = "AwsSdkRules";
         private const string Description = "Checks code for static ILogger variables.";
+        private const string LoggerInterfaceFullName = "ILogger";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.PreventStaticLoggersRuleId,
             Title,
@@ -37,21 +38,20 @@ namespace CustomRoslynAnalyzers
         private void AnalyzeFieldNode(SyntaxNodeAnalysisContext context)
         {
             var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-            if (fieldDeclaration == null) return;
+            if (fieldDeclaration == null)
+            {
+                return;
+            }
 
             // Check the modifiers of the node contains static
-            foreach (var m in fieldDeclaration.Modifiers)
+            if (fieldDeclaration.Modifiers.SingleOrDefault(m => m.Text.Equals("static")) != null)
             {
-                if (m.Text.Equals("static"))
+                var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
+                if (fieldSymbol != null && ImplementsILogger(fieldSymbol))
                 {
-                    var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
-                    if (fieldSymbol != null && ImplementsILogger(fieldSymbol))
-                    {
-                        var findAncestorsResult = FindAncestors(context.Node.Ancestors());
-                        var diagnostic = Diagnostic.Create(Rule, fieldDeclaration.GetLocation(), findAncestorsResult, fieldSymbol.ToString(), LoggerInterfaceFullName);
-                        context.ReportDiagnostic(diagnostic);
-                        break;
-                    }
+                    var findAncestorsResult = FindAncestors(context.Node.Ancestors());
+                    var diagnostic = Diagnostic.Create(Rule, fieldDeclaration.GetLocation(), findAncestorsResult, fieldSymbol.ToString(), LoggerInterfaceFullName);
+                    context.ReportDiagnostic(diagnostic);
                 }
             }
         }
@@ -59,7 +59,10 @@ namespace CustomRoslynAnalyzers
         private void AnalyzePropertyNode(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-            if (propertyDeclaration == null) return;
+            if (propertyDeclaration == null)
+            {
+                return;
+            }
             var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol != null
                 && propertySymbol.IsStatic
@@ -72,23 +75,13 @@ namespace CustomRoslynAnalyzers
             }
         }
 
-        private const string LoggerInterfaceFullName = "ILogger";
         private bool ImplementsILogger(ITypeSymbol typeSymbol)
         {
-            if (typeSymbol == null) return false;
-
-            // check if type is ILogger
-            if (IsILogger(typeSymbol.Name)) return true;
-
-            // check if type implements ILogger
-            var interfaces = typeSymbol.Interfaces;
-            var implementsInterface = interfaces.Any(i => IsILogger(i.Name));
-            if (implementsInterface) return true;
-
-            // check base class
-            if (ImplementsILogger(typeSymbol.BaseType)) return true;
-
-            return false;
+            if (typeSymbol == null)
+            {
+                return false;
+            }
+            return IsILogger(typeSymbol.Name) || typeSymbol.Interfaces.Any(i => IsILogger(i.Name)) || ImplementsILogger(typeSymbol.BaseType);
         }
 
         private bool IsILogger(string name)
@@ -99,16 +92,13 @@ namespace CustomRoslynAnalyzers
         // Find the Property and Field that declares the ILogger instance
         private string FindAncestors(IEnumerable<SyntaxNode> ancestors)
         {
-            foreach (var ancestor in ancestors)
+            var ancestor = ancestors.SingleOrDefault(tmpAncestor => tmpAncestor.GetType().Equals(typeof(ClassDeclarationSyntax)));
+            if (ancestor == null)
             {
-                var type = ancestor.GetType();
-                if (type.Equals(typeof(ClassDeclarationSyntax)))
-                {
-                    var classDeclarationSyntax = ancestor as ClassDeclarationSyntax;
-                    return classDeclarationSyntax.Identifier.Text;
-                }
+                return "No Ancestors";
             }
-            return "No Ancestors";
+            var classDeclarationSyntax = ancestor as ClassDeclarationSyntax;
+            return classDeclarationSyntax.Identifier.Text;
         }
     }
 }

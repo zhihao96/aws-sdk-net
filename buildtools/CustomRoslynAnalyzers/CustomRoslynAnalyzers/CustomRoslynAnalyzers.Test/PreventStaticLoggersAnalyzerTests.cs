@@ -4,15 +4,15 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
-using TestHelper;
+using CustomRoslynAnalyzers.Test.TestHelper;
 using Xunit;
 using CustomRoslynAnalyzers.CodeFix;
-using CustomRoslynAnalyzers.Test.Data;
 
 namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventStaticLoggersAnalyzerTests : CodeFixVerifier
+    public partial class PreventStaticLoggersAnalyzerTests : CodeFixVerifier
     {
+        private const string MessageFormat = "Static member {0} of type {1} implements {2}. Instances of {2} should not be stored in static variables. Logger configuration can change during SDK use, but static references are not impacted by this.";
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
             return new PreventStaticLoggersAnalyzer();
@@ -43,7 +43,7 @@ namespace TestPreventStaticLoggersAnalyzer
 
         // A test for all of the senarios including Static Field, Static Property
         [Theory]
-        [MemberData(nameof(PreventStaticLoggersAnalyzerData.AllTestData), MemberType = typeof(PreventStaticLoggersAnalyzerData))]
+        [MemberData(nameof(AllTestData), MemberType = typeof(PreventStaticLoggersAnalyzerTests))]
         public void CR1002_PreventStaticLoggersAnalyzer_Multiple_Tests(string dataWithoutLogger, 
             string declaringTypeName, string selfType, string interfaceName, 
             int row, int column, string codeFixDataWithoutLogger, string dataImplementILogger)
@@ -54,7 +54,7 @@ namespace TestPreventStaticLoggersAnalyzer
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventStaticLoggersRuleId,
-                Message = string.Format(PreventStaticLoggersAnalyzer.MessageFormat, declaringTypeName, selfType, interfaceName),
+                Message = string.Format(MessageFormat, declaringTypeName, selfType, interfaceName),
                 Severity = DiagnosticSeverity.Error,
                 Locations =
                     new[]

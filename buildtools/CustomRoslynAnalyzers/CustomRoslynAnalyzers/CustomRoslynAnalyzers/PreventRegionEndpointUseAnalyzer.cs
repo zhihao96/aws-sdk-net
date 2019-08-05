@@ -12,7 +12,7 @@ namespace CustomRoslynAnalyzers
     public class PreventRegionEndpointUseAnalyzer : DiagnosticAnalyzer
     {
         private const string Title = "Do not use static readonly RegionEndpoint members from within the SDK.";
-        public const string MessageFormat = "Target member uses {0}. This member {1} be used within the SDK. {2}";
+        private const string MessageFormat = "Target member uses {0}. This member {1} be used within the SDK. {2}";
         private const string Category = "AwsSdkRules";
         private const string Description = "Makes sure none of the static readonly RegionEndpoint members are used directly within the SDK itself.";
 
@@ -38,11 +38,9 @@ namespace CustomRoslynAnalyzers
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var memberAccessExpr = context.Node as MemberAccessExpressionSyntax;
-            if (memberAccessExpr == null) return;
             var memberSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IFieldSymbol;
-            if (memberSymbol == null) return;
 
-            var memberSymbolTypeName = memberSymbol.ContainingType.Name;
+            var memberSymbolTypeName = memberSymbol?.ContainingType.Name;
             if (memberSymbolTypeName?.ToString() == RegionEndpointTypeName)
             {
                 var memberAccessExpressionString = memberAccessExpr.ToString();
@@ -54,7 +52,7 @@ namespace CustomRoslynAnalyzers
                 // To check if it is a static readonly member except USEast1 and not a method
                 else if (memberSymbol.IsStatic && memberSymbol.IsReadOnly)
                 {
-                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "should never", "");
+                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), memberAccessExpressionString, "should never", ExtraResolutionMessage);
                     context.ReportDiagnostic(diagnostic);
                 }
             }

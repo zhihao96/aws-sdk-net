@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomRoslynAnalyzers.Test.Data
+namespace CustomRoslynAnalyzers.Test
 {
-    class PreventRegionEndpointUseAnalyzerData
+    public partial class PreventRegionEndpointUseAnalyzerTests
     {
         private const string BasicFieldData = @"
 using System;
@@ -96,6 +96,21 @@ namespace TestPreventRegionEndPointUseAnalyzer
     class Program
     {
         RegionEndpointFunc regionEndpointFunc = delegate () { return RegionEndpoint.USEast1; };
+        static void Main(string[] args)
+        {
+        }
+    }
+}";
+        private const string BasicWithoutUSEast1Data = @"
+using System;
+using System.Diagnostics.CodeAnalysis;
+using Amazon;
+
+namespace TestPreventRegionEndPointUseAnalyzer
+{
+    class Program
+    {
+        public static readonly RegionEndpoint test4 = RegionEndpoint.USWest1;
         static void Main(string[] args)
         {
         }
@@ -203,6 +218,22 @@ namespace TestPreventRegionEndPointUseAnalyzer
         }
     }
 }";
+        private const string WithoutUSEast1CodeFixData = @"
+using System;
+using System.Diagnostics.CodeAnalysis;
+using Amazon;
+
+namespace TestPreventRegionEndPointUseAnalyzer
+{
+    class Program
+    {
+        [SuppressMessage(""AWSSDKRules"", ""CR1004"")]
+        public static readonly RegionEndpoint test4 = RegionEndpoint.USWest1;
+        static void Main(string[] args)
+        {
+        }
+    }
+}";
 
         public static IEnumerable<object[]> TestInsideMethodData => CreateSeperateData();
 
@@ -221,7 +252,9 @@ namespace TestPreventRegionEndPointUseAnalyzer
                 // Data for the Lambda Expression
                 new object[] { BasicLambdaData, 10, 50, LambdaCodeFixData},
                 // Data for the Delegate 
-                new object[] {BasicDelegateData, 11, 70, DelegateCodeFixData}
+                new object[] {BasicDelegateData, 11, 70, DelegateCodeFixData},
+                // Data for the use of USWest1 not USEast1
+                new object[] {BasicWithoutUSEast1Data, 10, 55, WithoutUSEast1CodeFixData}
             };
         }
     }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomRoslynAnalyzers.Test.Data
+namespace CustomRoslynAnalyzers.Test
 {
-    class PreventHashAlgorithmCreateAnalyzerData
+    public partial class PreventHashAlgorithmCreateAnalyzerTests
     {
         private const string BasicCorrectData = @"
 using System;

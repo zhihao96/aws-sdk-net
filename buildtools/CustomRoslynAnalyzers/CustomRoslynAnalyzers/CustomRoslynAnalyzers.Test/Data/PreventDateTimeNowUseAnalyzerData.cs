@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomRoslynAnalyzers.Test.Data
+namespace CustomRoslynAnalyzers.Test
 {
-    public class PreventDateTimeNowUseAnalyzerData
+    public partial class PreventDateTimeNowUseAnalyzerTests
     {
         private const string BasicCorrectData = @"
 using System;

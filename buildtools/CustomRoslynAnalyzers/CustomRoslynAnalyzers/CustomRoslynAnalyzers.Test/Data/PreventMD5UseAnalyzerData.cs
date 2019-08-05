@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CustomRoslynAnalyzers.Test.Data
+namespace CustomRoslynAnalyzers.Test
 {
-    class PreventMD5UseAnalyzerData
+    public partial class PreventMD5AnalyzerTests
     {
         private const string BasicFieldData = @"
 using System.Security.Cryptography;
