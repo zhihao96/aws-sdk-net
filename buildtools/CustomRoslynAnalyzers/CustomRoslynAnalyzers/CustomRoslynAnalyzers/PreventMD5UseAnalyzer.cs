@@ -152,8 +152,8 @@ namespace CustomRoslynAnalyzers
         {
             if (IsAssignableToMD5(type))
             {
-                var returnResult = FindAncestors(context.Node);
-                var diagnostic = Diagnostic.Create(Rule, location, type.ToString(), returnResult);
+                var ancestorsResult = FindAncestors(context.Node);
+                var diagnostic = Diagnostic.Create(Rule, location, type.ToString(), ancestorsResult);
                 context.ReportDiagnostic(diagnostic);
             }
         }
@@ -184,7 +184,6 @@ namespace CustomRoslynAnalyzers
                 var type = ancestor.GetType();
                 if (type.Equals(typeof(ClassDeclarationSyntax)))
                 {
-                    var test = node.GetType();
                     if (node.GetType().Equals(typeof(MethodDeclarationSyntax)))
                     {
                         return (node as MethodDeclarationSyntax).Identifier.Text;

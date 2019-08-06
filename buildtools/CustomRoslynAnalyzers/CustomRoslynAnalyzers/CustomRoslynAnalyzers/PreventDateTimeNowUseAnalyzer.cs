@@ -48,8 +48,8 @@ namespace CustomRoslynAnalyzers
                 // check the method is a member of the class DateTime
                 if (memberSymbol?.ContainingType.SpecialType == SpecialType.System_DateTime)
                 {
-                    var result = FindAncestors(context.Node.Ancestors());
-                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), result.MethodIdentifier ?? "null", result.ClassIdentifier, "System.DateTime." + memberAccessExprName);
+                    var ancestorsResult = FindAncestors(context.Node.Ancestors());
+                    var diagnostic = Diagnostic.Create(Rule, memberAccessExpr.GetLocation(), ancestorsResult.MethodIdentifier ?? "null", ancestorsResult.ClassIdentifier, "System.DateTime." + memberAccessExprName);
                     context.ReportDiagnostic(diagnostic);
                 }
             }

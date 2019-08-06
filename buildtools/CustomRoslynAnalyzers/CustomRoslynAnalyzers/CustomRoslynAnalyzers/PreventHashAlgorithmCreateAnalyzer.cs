@@ -47,8 +47,8 @@ namespace CustomRoslynAnalyzers
                 var returnType = memberSymbol?.ReturnType.ToString();
                 if (returnType == "HashAlgorithm" || returnType == "System.Security.Cryptography.HashAlgorithm")
                 {
-                    var result = FindAncestors(context.Node.Ancestors());
-                    var diagnostic = Diagnostic.Create(Rule, invocationExpr.GetLocation(), result.MethodIdentifier ?? "null", result.ClassIdentifier, "System.Security.Cryptography." + invocationExpr.ToString());
+                    var ancestorsResult = FindAncestors(context.Node.Ancestors());
+                    var diagnostic = Diagnostic.Create(Rule, invocationExpr.GetLocation(), ancestorsResult.MethodIdentifier ?? "null", ancestorsResult.ClassIdentifier, "System.Security.Cryptography." + invocationExpr.ToString());
                     context.ReportDiagnostic(diagnostic);
                 }
             }

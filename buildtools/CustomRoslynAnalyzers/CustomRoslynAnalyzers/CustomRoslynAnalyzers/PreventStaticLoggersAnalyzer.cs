@@ -69,8 +69,8 @@ namespace CustomRoslynAnalyzers
                 && propertySymbol.SetMethod != null
                 && ImplementsILogger(propertySymbol.Type))
             {
-                var findAncestorsResult = FindAncestors(context.Node.Ancestors());
-                var diagnostic = Diagnostic.Create(Rule, propertyDeclaration.GetLocation(), findAncestorsResult, propertySymbol.Type.ToString(), LoggerInterfaceFullName);
+                var ancestorsResult = FindAncestors(context.Node.Ancestors());
+                var diagnostic = Diagnostic.Create(Rule, propertyDeclaration.GetLocation(), ancestorsResult, propertySymbol.Type.ToString(), LoggerInterfaceFullName);
                 context.ReportDiagnostic(diagnostic);
             }
         }
