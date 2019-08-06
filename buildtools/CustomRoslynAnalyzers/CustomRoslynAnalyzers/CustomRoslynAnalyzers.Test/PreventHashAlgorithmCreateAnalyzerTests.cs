@@ -27,8 +27,8 @@ namespace CustomRoslynAnalyzers.Test
         [MemberData(nameof(TestCorrectData), MemberType = typeof(PreventHashAlgorithmCreateAnalyzerTests))]
         public void CR1001_PreventHashAlgorithmCreateAnalyzer_Correct_Test(string data)
         {
-            var expected = new DiagnosticResult[0];
-            VerifyCSharpDiagnostic(data, expected);
+            var expectedResult = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expectedResult);
         }
 
         // A Test for HashAlgorithm.Create() in method
@@ -94,7 +94,7 @@ namespace CustomRoslynAnalyzers.Test
         // Compare the actual diagnostic result with expected result
         private void CompareActualAndExpected(string testData, string methodName, string className, string invocation , int row, int column, string testCodeFixData)
         {
-            var expected = new DiagnosticResult
+            var expectedResult = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventHashAlgorithmCreateRuleId,
                 Message = string.Format(MessageFormat, methodName, className, "System.Security.Cryptography." + invocation),
@@ -105,7 +105,7 @@ namespace CustomRoslynAnalyzers.Test
                         new DiagnosticResultLocation("Test0.cs", row, column)
                     }
             };
-            VerifyCSharpDiagnostic(testData, expected);
+            VerifyCSharpDiagnostic(testData, expectedResult);
             VerifyCSharpFix(testData, testCodeFixData);
         }
     }

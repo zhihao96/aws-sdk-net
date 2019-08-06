@@ -38,8 +38,8 @@ namespace TestPreventRegionEndpointUseAnalyzer
         }
     }
 }";
-            var expected = new DiagnosticResult[0];
-            VerifyCSharpDiagnostic(data, expected);
+            var expectedResult = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expectedResult);
         }
 
         // A test for all of the senarios including Field, Property, InsideMethod, Declare Method, PassIn Parameter to Method, Lambda Expression, Delegate
@@ -47,7 +47,7 @@ namespace TestPreventRegionEndpointUseAnalyzer
         [MemberData(nameof(TestInsideMethodData), MemberType = typeof(PreventRegionEndpointUseAnalyzerTests))]
         public void CR1004_PreventRegionEndpointUseAnalyzer_Multiple_Tests(string data, int row, int column, string codeFixData)
         {
-            var expected = new DiagnosticResult
+            var expectedResult = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventRegionEndpointUseRuleId,
                 Message = string.Format(MessageFormat, "RegionEndpoint.USEast1", "shouldn't usually", USEast1ResolutionMessage),
@@ -60,10 +60,10 @@ namespace TestPreventRegionEndpointUseAnalyzer
             };
             if (!data.Contains("USEast1"))
             {
-                expected.Message = string.Format(MessageFormat, "RegionEndpoint.USWest1", "should never", USEast1ResolutionMessage);
+                expectedResult.Message = string.Format(MessageFormat, "RegionEndpoint.USWest1", "should never", USEast1ResolutionMessage);
             }
             
-            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpDiagnostic(data, expectedResult);
             VerifyCSharpFix(data, codeFixData);
         }
     }

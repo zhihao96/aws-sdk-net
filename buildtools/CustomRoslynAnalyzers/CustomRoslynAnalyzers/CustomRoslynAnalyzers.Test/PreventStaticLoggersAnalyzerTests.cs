@@ -37,8 +37,8 @@ namespace TestPreventStaticLoggersAnalyzer
         }
     }
 }";
-            var expected = new DiagnosticResult[0];
-            VerifyCSharpDiagnostic(data, expected);
+            var expectedResult = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expectedResult);
         }
 
         // A test for all of the senarios including Static Field, Static Property
@@ -51,7 +51,7 @@ namespace TestPreventStaticLoggersAnalyzer
             var data = string.Format(dataWithoutLogger, dataImplementILogger);
             var codeFixData = string.Format(codeFixDataWithoutLogger, dataImplementILogger);
 
-            var expected = new DiagnosticResult
+            var expectedResult = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventStaticLoggersRuleId,
                 Message = string.Format(MessageFormat, declaringTypeName, selfType, interfaceName),
@@ -62,7 +62,7 @@ namespace TestPreventStaticLoggersAnalyzer
                         new DiagnosticResultLocation("Test0.cs", row, column)
                     }
             };
-            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpDiagnostic(data, expectedResult);
             VerifyCSharpFix(data, codeFixData);
         }
     }

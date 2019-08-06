@@ -26,8 +26,8 @@ namespace CustomRoslynAnalyzers.Test
         [MemberData(nameof(TestCorrectData), MemberType = typeof(PreventDateTimeNowUseAnalyzerTests))]
         public void CR1003_PreventDateTimeNowUseAnalyzer_Correct_Test(string data)
         {
-            var expected = new DiagnosticResult[0];
-            VerifyCSharpDiagnostic(data, expected);
+            var expectedResult = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expectedResult);
         }
 
         // A Test for DateTime.Today and DateTime.Now and DateTime.UtcNow in methods
@@ -93,7 +93,7 @@ namespace CustomRoslynAnalyzers.Test
         // Compare the actual diagnostic result with expected result
         private void CompareActualAndExpected(string testData, string method, string className, string dateTimeAttribute, int row, int colomn, string testCodeFixData)
         {
-            var expected = new DiagnosticResult
+            var expectedResult = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventDateTimeNowUseRuleId,
                 Message = string.Format(MessageFormat, method, className, "System." + dateTimeAttribute),
@@ -104,7 +104,7 @@ namespace CustomRoslynAnalyzers.Test
                         new DiagnosticResultLocation("Test0.cs", row, colomn)
                     }
             };
-            VerifyCSharpDiagnostic(testData, expected);
+            VerifyCSharpDiagnostic(testData, expectedResult);
             VerifyCSharpFix(testData, testCodeFixData);
         }
     }

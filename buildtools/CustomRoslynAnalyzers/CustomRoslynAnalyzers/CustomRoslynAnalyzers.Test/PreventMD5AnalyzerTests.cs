@@ -41,8 +41,8 @@ namespace TestPreventMD5UseAnalyzer
         }
     }
 }";
-            var expected = new DiagnosticResult[0];
-            VerifyCSharpDiagnostic(data, expected);
+            var expectedResult = new DiagnosticResult[0];
+            VerifyCSharpDiagnostic(data, expectedResult);
         }
 
         /// A test for all of the senarios including 
@@ -52,7 +52,7 @@ namespace TestPreventMD5UseAnalyzer
         [MemberData(nameof(TestInsideMethodData), MemberType = typeof(PreventMD5AnalyzerTests))]
         public void CR1000_PreventMD5UseAnalyzer_Multiple_Tests(string data, string typeData, string belongsToData, int row, int column, string codeFixData)
         {
-            var expected = new DiagnosticResult
+            var expectedResult = new DiagnosticResult
             {
                 Id = DiagnosticIds.PreventMD5UseRuleId,
                 Message = string.Format(MessageFormat, typeData, belongsToData),
@@ -63,7 +63,7 @@ namespace TestPreventMD5UseAnalyzer
                         new DiagnosticResultLocation("Test0.cs", row, column)
                     }
             };
-            VerifyCSharpDiagnostic(data, expected);
+            VerifyCSharpDiagnostic(data, expectedResult);
             VerifyCSharpFix(data, codeFixData);
         }
     }
