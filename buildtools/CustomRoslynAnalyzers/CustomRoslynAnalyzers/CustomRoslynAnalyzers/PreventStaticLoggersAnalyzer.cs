@@ -44,7 +44,7 @@ namespace CustomRoslynAnalyzers
             }
 
             // Check the modifiers of the node contains static
-            if (fieldDeclaration.Modifiers.SingleOrDefault(m => m.Text.Equals("static")) != null)
+           if (fieldDeclaration.Modifiers.SingleOrDefault(m => m.Text.Contains("static")).Text != "")
             {
                 var fieldSymbol = context.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type).Symbol as INamedTypeSymbol;
                 if (fieldSymbol != null && ImplementsILogger(fieldSymbol))

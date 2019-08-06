@@ -164,6 +164,10 @@
         <Exec Command="dotnet build -c $(Configuration) --no-incremental AWSSDKGenerator.sln" WorkingDirectory="..\generator"/>
         <Exec Command="ServiceClientGenerator.exe $(GeneratorDisablePCLSupport) $(GeneratorUnityPath) $(GeneratorPartialBuildArgument)"
             WorkingDirectory="..\generator\ServiceClientGenerator\bin\Release"/>
+        <MSBuild Projects="..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers.sln"
+        Targets="Clean;Build"
+        Properties="Configuration=Release"/>
+        <Message Text="CustomRoslynAnalyzer builds successfully." />
     </Target>
 
     <Target Name="ValidateRepo" Condition="Exists('$(InternalBuildTools)\references.targets')=='true' And '$(ServiceList)'=='' And !$(DisableValidateRepo)" DependsOnTargets="build-tools">  
