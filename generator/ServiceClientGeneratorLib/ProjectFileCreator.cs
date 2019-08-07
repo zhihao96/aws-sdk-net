@@ -77,7 +77,7 @@ namespace ServiceClientGenerator
                     projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                     projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
                     projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
-                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
+                    projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\buildtools\CustomRoslynAnalyzers.dll";
 
                     var projectConfigurationData = new ProjectConfigurationData { ProjectGuid = projectGuid };
                     var projectName = Path.GetFileNameWithoutExtension(projectFilename);
@@ -177,7 +177,7 @@ namespace ServiceClientGenerator
                 projectProperties.DefineConstants = projectFileConfiguration.CompilationConstants;
                 projectProperties.BinSubfolder = projectFileConfiguration.BinSubFolder;
                 projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
-                projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
+                projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers.dll";
 
                 var projectConfigurationData = new ProjectConfigurationData { ProjectGuid = projectGuid };
                 var projectName = Path.GetFileNameWithoutExtension(projectFilename);
@@ -283,7 +283,7 @@ namespace ServiceClientGenerator
             projectProperties.PackageReferences = projectFileConfiguration.PackageReferences;
             projectProperties.FxcopAnalyzerRuleSetFilePath = @"..\..\..\AWSDotNetSDK.ruleset";
             projectProperties.FxcopAnalyzerRuleSetFilePathForBuild = @"..\..\..\AWSDotNetSDKForBuild.ruleset";
-            projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll";
+            projectProperties.CustomRoslynAnalyzersDllDirectory = @"..\..\..\..\buildtools\CustomRoslynAnalyzers.dll";
 
             List<Dependency> dependencies;
             List<PackageReference> references = new List<PackageReference>();

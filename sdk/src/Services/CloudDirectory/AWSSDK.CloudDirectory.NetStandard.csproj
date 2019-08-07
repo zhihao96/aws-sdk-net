@@ -42,7 +42,7 @@
   </Choose>
 
   <ItemGroup>
-    <Analyzer Include= "..\..\..\..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers\bin\Debug\netstandard2.0\CustomRoslynAnalyzers.dll" />
+    <Analyzer Include= "..\..\..\..\buildtools\CustomRoslynAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="**/_pcl/**"/>

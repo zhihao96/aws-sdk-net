@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers", "CustomRoslynAnalyzers\CustomRoslynAnalyzers\CustomRoslynAnalyzers.csproj", "{2B2261B5-B9B5-4A1A-ABBC-DAA03EA73624}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers", "CustomRoslynAnalyzers\CustomRoslynAnalyzers.csproj", "{2B2261B5-B9B5-4A1A-ABBC-DAA03EA73624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers.Test", "CustomRoslynAnalyzers\CustomRoslynAnalyzers.Test\CustomRoslynAnalyzers.Test.csproj", "{E33432B7-B76B-49B7-B403-906AEFCE8604}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers.Test", "CustomRoslynAnalyzers.Test\CustomRoslynAnalyzers.Test.csproj", "{E33432B7-B76B-49B7-B403-906AEFCE8604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers.Vsix", "CustomRoslynAnalyzers\CustomRoslynAnalyzers.Vsix\CustomRoslynAnalyzers.Vsix.csproj", "{026FBEC4-8BDD-41FC-94D8-7C3062804AAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRoslynAnalyzers.Vsix", "CustomRoslynAnalyzers.Vsix\CustomRoslynAnalyzers.Vsix.csproj", "{026FBEC4-8BDD-41FC-94D8-7C3062804AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

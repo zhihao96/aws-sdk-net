@@ -29,7 +29,7 @@ namespace CustomRoslynAnalyzers.Test.TestHelper
         private static readonly MetadataReference MD5Reference = MetadataReference.CreateFromFile(typeof(MD5).Assembly.Location);
         private static readonly MetadataReference RunTimeReference = MetadataReference.CreateFromFile(Assembly.Load("netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51").Location);
         private static readonly MetadataReference NetStandardReference = MetadataReference.CreateFromFile(Assembly.Load("System.Runtime, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a").Location);
-        private static readonly MetadataReference AmazonReference = MetadataReference.CreateFromFile("..\\..\\..\\..\\..\\..\\..\\sdk\\src\\Core\\bin\\Debug\\netstandard2.0\\AWSSDK.Core.dll");
+        private static readonly MetadataReference AmazonReference = MetadataReference.CreateFromFile("..\\..\\..\\..\\..\\..\\sdk\\src\\Core\\bin\\Debug\\netstandard2.0\\AWSSDK.Core.dll");
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
