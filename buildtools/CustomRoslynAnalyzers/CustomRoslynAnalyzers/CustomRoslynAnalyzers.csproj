@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)bin\Release\netstandard2.0\$(TargetFileName)&quot; &quot;$(ProjectDir)..\..\&quot; /Y" />
+    <Exec Command="if $(ConfigurationName) == Debug (xcopy &quot;$(ProjectDir)bin\Debug\netstandard2.0\$(TargetFileName)&quot; &quot;$(ProjectDir)..\..\&quot; /Y) else (xcopy &quot;$(ProjectDir)bin\Release\netstandard2.0\$(TargetFileName)&quot; &quot;$(ProjectDir)..\..\&quot; /Y)" />
   </Target>
 
 </Project>
