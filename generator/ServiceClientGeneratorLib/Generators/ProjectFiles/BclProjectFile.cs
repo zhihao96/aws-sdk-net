@@ -77,7 +77,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
 
-  <PropertyGroup Condition="" '$(RuleSetFileForBuild)' == 'false' "">
+  <PropertyGroup Condition="" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' "">
 	<CodeAnalysisRuleSet>");
             
             #line 26 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\BclProjectFile.tt"

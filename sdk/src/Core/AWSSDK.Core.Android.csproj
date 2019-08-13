@@ -21,7 +21,7 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' ">
     <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">

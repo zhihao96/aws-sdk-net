@@ -24,7 +24,7 @@
     <NetStandardImplicitPackageVersion Condition="'$(TargetFramework)' == 'netstandard2.0'">2.0.0</NetStandardImplicitPackageVersion>
   </PropertyGroup>
   
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' ">
     <CodeAnalysisRuleSet>..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">

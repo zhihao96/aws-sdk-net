@@ -73,7 +73,8 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line default
             #line hidden
             this.Write("</BaseIntermediateOutputPath>\r\n  </PropertyGroup>\r\n\r\n  <PropertyGroup Condition=\"" +
-                    " \'$(RuleSetFileForBuild)\' == \'false\' \">\r\n\t<CodeAnalysisRuleSet>");
+                    " \'$(RuleSetFileForBuild)\' == \'false\' Or \'$(RuleSetFileForBuild)\' == \'\' \">\r\n\t<Cod" +
+                    "eAnalysisRuleSet>");
             
             #line 29 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\Win8ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.FxcopAnalyzerRuleSetFilePath));

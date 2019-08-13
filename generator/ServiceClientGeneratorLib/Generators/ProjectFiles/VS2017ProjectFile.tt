@@ -82,7 +82,7 @@
 #>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' ">
+  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' ">
 	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePath#></CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">

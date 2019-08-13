@@ -219,7 +219,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
             #line default
             #line hidden
             this.Write("  </PropertyGroup>\r\n\r\n  <PropertyGroup Condition=\" \'$(RuleSetFileForBuild)\' == \'f" +
-                    "alse\' \">\r\n\t<CodeAnalysisRuleSet>");
+                    "alse\' Or \'$(RuleSetFileForBuild)\' == \'\' \">\r\n\t<CodeAnalysisRuleSet>");
             
             #line 86 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\VS2017ProjectFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Project.FxcopAnalyzerRuleSetFilePath));

@@ -76,7 +76,7 @@ namespace ServiceClientGenerator.Generators.ProjectFiles
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="" '$(RuleSetFileForBuild)' == 'false' "">
+  <PropertyGroup Condition="" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' "">
 	<CodeAnalysisRuleSet>");
             
             #line 30 "C:\codebase\v3\AWSDotNetPublic\generator\ServiceClientGeneratorLib\Generators\ProjectFiles\WinPhone81ProjectFile.tt"
