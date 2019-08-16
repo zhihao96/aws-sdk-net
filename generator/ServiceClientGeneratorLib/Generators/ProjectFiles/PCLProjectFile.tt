@@ -26,13 +26,6 @@
     <BaseIntermediateOutputPath>obj\\<#=this.Project.BinSubfolder#></BaseIntermediateOutputPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' ">
-	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePath#></CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">
-	<CodeAnalysisRuleSet><#=this.Project.FxcopAnalyzerRuleSetFilePathForBuild#></CodeAnalysisRuleSet>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -151,40 +144,6 @@
         }
     }
 #>
-
-<#
-    if(this.Project.PackageReferences != null)
-    {
-#>
-  <ItemGroup>
-<#
-        foreach(var package in this.Project.PackageReferences)
-        {
-          if(package.HasPrivateAssets)
-          {
-#>
-    <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>">
-      <PrivateAssets><#=package.PrivateAssets#></PrivateAssets>
-    </PackageReference>
-<#
-          }
-          else
-          {
-#>
-	  <PackageReference Include="<#=package.Include#>" Version="<#=package.Version#>"/>
-<#
-		    	}
-        }
-#>
-  </ItemGroup>
-<#
-  	}
-#>
-
-  <ItemGroup>
-    <Analyzer Include= "<#=this.Project.CustomRoslynAnalyzersDllDirectory#>" />
-  </ItemGroup>
-
   <ItemGroup>
 	<None Include="packages.config" />
     <Compile Include="Properties\AssemblyInfo.cs" />
