@@ -4,5 +4,5 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "<Pending>", Scope = "member", Target = "~M:Amazon.StorageGateway.Util.AmazonStorageGatewayUtil.GetHeader(System.String)~System.String")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "Generated Code", Scope = "member", Target = "~M:Amazon.StorageGateway.Util.AmazonStorageGatewayUtil.GetHeader(System.String)~System.String")]
 

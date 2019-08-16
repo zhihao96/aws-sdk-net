@@ -4,6 +4,6 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~F:Amazon.CloudSearch.IndexFieldType.Double")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "member", Target = "~F:Amazon.CloudSearch.IndexFieldType.Int")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Generated Code", Scope = "member", Target = "~F:Amazon.CloudSearch.IndexFieldType.Double")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Generated Code", Scope = "member", Target = "~F:Amazon.CloudSearch.IndexFieldType.Int")]
 
