@@ -20,14 +20,6 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin\$(Configuration)\net35</OutputPath>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'false' Or '$(RuleSetFileForBuild)' == '' ">
-    <CodeAnalysisRuleSet>..\..\..\..\AWSDotNetSDK.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(RuleSetFileForBuild)' == 'true' ">
-    <CodeAnalysisRuleSet>..\..\..\..\AWSDotNetSDKForBuild.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="**/_bcl45/**"/>
     <Compile Remove="**/obj/**"/>
@@ -48,12 +40,6 @@
       <PackageReference Include="MSTest.TestFramework" Version="1.4.0"/>
       <PackageReference Include="AutoFixture" Version="3.51.0"/>
       <PackageReference Include="AutoFixture.AutoMoq" Version="3.51.0"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

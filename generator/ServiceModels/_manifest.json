@@ -281,16 +281,6 @@
                 {
                     "include": "AutoFixture.AutoMoq",
                     "version": "3.51.0"
-                },
-                {
-                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
-                    "version": "2.9.3",
-                    "privateAssets": "all"
-                },
-                {
-                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
-                    "version": "0.2.12-alpha",
-                    "privateAssets": "all"
                 }
             ],
             "frameworkReferences" : [
@@ -337,16 +327,6 @@
                 {
                     "include": "AutoFixture.AutoMoq",
                     "version": "3.51.0"
-                },
-                {
-                    "include": "Microsoft.CodeAnalysis.FxCopAnalyzers",
-                    "version": "2.9.3",
-                    "privateAssets": "all"
-                },
-                {
-                    "include": "Microsoft.DotNet.Analyzers.Compatibility",
-                    "version": "0.2.12-alpha",
-                    "privateAssets": "all"
                 }
             ],
             "frameworkReferences" : [
