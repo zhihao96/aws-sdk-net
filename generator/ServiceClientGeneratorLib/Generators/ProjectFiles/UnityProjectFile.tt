@@ -23,7 +23,6 @@
     <SchemaVersion>2.0</SchemaVersion>
 	<RestorePackages>true</RestorePackages>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

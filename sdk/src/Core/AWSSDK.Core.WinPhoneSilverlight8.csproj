@@ -22,7 +22,6 @@
     <RestorePackages>true</RestorePackages>
     <BaseIntermediateOutputPath>obj\wp8</BaseIntermediateOutputPath>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
