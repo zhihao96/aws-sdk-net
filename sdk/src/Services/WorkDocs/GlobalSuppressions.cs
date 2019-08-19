@@ -4,5 +4,5 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "Generated Code", Scope = "member", Target = "~M:Amazon.WorkDocs.Utils.ContentManager.Dispose(System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Scope = "member", Target = "~M:Amazon.WorkDocs.Utils.ContentManager.Dispose(System.Boolean)")]
 

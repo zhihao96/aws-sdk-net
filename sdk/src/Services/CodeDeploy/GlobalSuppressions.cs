@@ -4,6 +4,6 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Generated Code", Scope = "member", Target = "~P:Amazon.CodeDeploy.Model.RevisionLocation.String")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Generated Code", Scope = "member", Target = "~F:Amazon.CodeDeploy.RevisionLocationType.String")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Scope = "member", Target = "~P:Amazon.CodeDeploy.Model.RevisionLocation.String")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Scope = "member", Target = "~F:Amazon.CodeDeploy.RevisionLocationType.String")]
 

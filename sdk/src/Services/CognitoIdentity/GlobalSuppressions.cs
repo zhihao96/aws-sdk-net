@@ -4,4 +4,4 @@
 // Project-level suppressions either have no target or are given 
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1802:Use literals where appropriate", Justification = "Generated Code", Scope = "member", Target = "~F:Amazon.CognitoIdentity.CognitoAWSCredentials.IDENTITY_ID_CACHE_KEY")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1802:Use literals where appropriate", Scope = "member", Target = "~F:Amazon.CognitoIdentity.CognitoAWSCredentials.IDENTITY_ID_CACHE_KEY")]
