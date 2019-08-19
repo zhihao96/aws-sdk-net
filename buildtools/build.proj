@@ -64,22 +64,6 @@
       <ReferenceServiceDLLs>false</ReferenceServiceDLLs>
       <GeneratorPartialBuildArgument></GeneratorPartialBuildArgument>
     </PropertyGroup>
-    <Choose>
-        <When Condition="'$(ServiceList)'==''">
-            <PropertyGroup>
-                <FxCop35TargetFileName>SDK-3.5.FxCop</FxCop35TargetFileName>
-                <FxCop45TargetFileName>SDK-4.5.FxCop</FxCop45TargetFileName>
-                <BCLUnitTestCategories></BCLUnitTestCategories>
-                <NetStandardTestCategories></NetStandardTestCategories>
-            </PropertyGroup>
-        </When>
-        <Otherwise>
-            <PropertyGroup>
-                <FxCop35TargetFileName>SDK-3.5.partial.FxCop</FxCop35TargetFileName>
-                <FxCop45TargetFileName>SDK-4.5.partial.FxCop</FxCop45TargetFileName>
-            </PropertyGroup>
-        </Otherwise>
-    </Choose>
 
     <Target Name="build-buildtools"
             DependsOnTargets="build-custom-tasks;build-test-wrapper;build-test-analyzer" />
@@ -113,8 +97,7 @@
         <Delete Files="$(CustomTasksAssembly)" />
         <Delete Files="$(TestAnalyzerAssembly)" />
     </Target>
-
-    <UsingTask TaskName="CustomTasks.UpdateFxCopProject" AssemblyFile="$(CustomTasksAssembly)"/>
+    
     <UsingTask TaskName="CustomTasks.XamarinComponent" AssemblyFile="$(CustomTasksAssembly)"/>
     <UsingTask TaskName="CustomTasks.UnityPackage" AssemblyFile="$(CustomTasksAssembly)"/>
     <UsingTask TaskName="CustomTasks.UnityBuild" AssemblyFile="$(CustomTasksAssembly)"/>
@@ -164,9 +147,11 @@
         <Exec Command="dotnet build -c $(Configuration) --no-incremental AWSSDKGenerator.sln" WorkingDirectory="..\generator"/>
         <Exec Command="ServiceClientGenerator.exe $(GeneratorDisablePCLSupport) $(GeneratorUnityPath) $(GeneratorPartialBuildArgument)"
             WorkingDirectory="..\generator\ServiceClientGenerator\bin\Release"/>
+    </Target>
+    <Target Name="build-custom-roslyn-analyzer">
+        <Message Text="Build Custom Roslyn Analyzer"/>
         <Exec Command="dotnet build -c $(Configuration) --no-incremental CustomRoslynAnalyzers.csproj"
-            WorkingDirectory="..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers"/>
-        
+                WorkingDirectory="..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers"/>
     </Target>
 
     <Target Name="ValidateRepo" Condition="Exists('$(InternalBuildTools)\references.targets')=='true' And '$(ServiceList)'=='' And !$(DisableValidateRepo)" DependsOnTargets="build-tools">  
@@ -186,7 +171,7 @@
             DestinationFolder="$(Deployment)" />
     </Target>
 
-    <Target Name="build-sdk-desktop" DependsOnTargets="run-generator;ValidateRepo;restore-nuget">
+    <Target Name="build-sdk-desktop" DependsOnTargets="run-generator;build-custom-roslyn-analyzer;ValidateRepo;restore-nuget">
         <Message Text="Restore and compile .Net35 SDK"/>
         <Exec Command="dotnet restore -f  $(Net35SolutionsFile)" WorkingDirectory="..\sdk"/>
         <Exec Command="dotnet clean -c $(Configuration) $(Net35SolutionsFile)" WorkingDirectory="..\sdk"/>
@@ -198,7 +183,7 @@
         <Exec Command="dotnet build -c $(Configuration) --no-incremental $(Net45SolutionsFile) /p:AWSKeyFile=$(CustomSnkFileLocation);SignAssembly=true;RuleSetFileForBuild=$(RuleSetFileForBuild)" WorkingDirectory="..\sdk"/>
     </Target>
 
-    <Target Name="build-sdk-desktop-service" DependsOnTargets="run-generator;restore-nuget-service;">
+    <Target Name="build-sdk-desktop-service" DependsOnTargets="run-generator;build-custom-roslyn-analyzer;restore-nuget-service;">
         <Message Text="Restore and compile service solution "/>
         <Exec Command="dotnet restore -f  %(ServiceName.Filename).sln" WorkingDirectory="..\sdk\src\Services\%(ServiceName.Filename)"/>
         <Exec Command="dotnet clean -c $(Configuration) %(ServiceName.FileName).sln" WorkingDirectory="..\sdk\src\Services\%(ServiceName.FileName)"/>
@@ -206,13 +191,13 @@
     </Target>
 
 
-  <Target Name="build-code-analysis" DependsOnTargets="restore-nuget;run-generator">
+  <Target Name="build-code-analysis" DependsOnTargets="restore-nuget;run-generator;build-custom-roslyn-analyzer">
     <MSBuild Projects="..\sdk\AWSSDK.CodeAnalysis.sln"
           Targets="Clean;Build"
           Properties="Configuration=$(Configuration);AWSKeyFile=$(CustomSnkFileLocation)" />
   </Target>
 
-    <Target Name="build-sdk-pcl" DependsOnTargets="restore-nuget;run-generator" Condition="!$(DisablePCLSupport)">
+    <Target Name="build-sdk-pcl" DependsOnTargets="restore-nuget;run-generator;build-custom-roslyn-analyzer" Condition="!$(DisablePCLSupport)">
         <Message Text="Compile the Portable Class Library SDK"/>
         <MSBuild Projects="..\sdk\$(PCLSolutionsFile)"
             Targets="Clean;Build"
@@ -226,7 +211,7 @@
         <Exec Command="dotnet build -c $(Configuration) --no-incremental $(NetStandardSolutionFile) /p:AWSKeyFile=$(CustomSnkFileLocation);SignAssembly=true;RuleSetFileForBuild=$(RuleSetFileForBuild)" WorkingDirectory="..\sdk"/>        
     </Target>
 
-  <Target Name="build-sdk-unity" DependsOnTargets="restore-nuget;run-generator" Condition="!$(DisableUnitySupport)">
+  <Target Name="build-sdk-unity" DependsOnTargets="restore-nuget;run-generator;build-custom-roslyn-analyzer" Condition="!$(DisableUnitySupport)">
     <Message Text="Compile the Unity SDK"/>
     <MSBuild Projects="..\sdk\$(UnitySolutionsFile)"
       Targets="Clean;Build"
@@ -239,9 +224,9 @@
         DeploymentFolder="..\deployment" />  		
   </Target>
 
-    <Target Name="test-sdk" DependsOnTargets="init;build-sdk;build-roslyn-anlyzer-test-and-run;fxcop;run-smoke-tests;run-unit-tests;run-integ-tests;run-CSM-tests;test-backward-compatibility" />
+    <Target Name="test-sdk" DependsOnTargets="init;build-sdk;build-roslyn-anlyzer-test-and-run;run-smoke-tests;run-unit-tests;run-integ-tests;run-CSM-tests;test-backward-compatibility" />
 
-    <Target Name="test-sdk-service" DependsOnTargets="init;build-sdk-service;build-roslyn-anlyzer-test-and-run;fxcop;run-unit-tests-service;run-integ-tests-service;test-backward-compatibility" />
+    <Target Name="test-sdk-service" DependsOnTargets="init;build-sdk-service;build-roslyn-anlyzer-test-and-run;run-unit-tests-service;run-integ-tests-service;test-backward-compatibility" />
 
     <Target Name="validate-integ-tests" DependsOnTargets="build-custom-tasks">
         <ValidateIntegTests
@@ -564,22 +549,6 @@
 
     <!-- TEST TARGETS/TASKS -->
 
-    <Target Name="fxcop" DependsOnTargets="init;copy-assemblies" Condition="Exists('$(fxcopcmdexe)') And ($(Configuration) == 'Release')">
-        <!-- Update FxCop project files -->
-        <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net35" FxCopProject="..\sdk\SDK-3.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop35TargetFileName)" BinSuffix="net35" TargetServices="$(ServiceList)"/>
-        <UpdateFxCopProject Assemblies="$(Deployment)\assemblies\net45" FxCopProject="..\sdk\SDK-4.5.FxCop" FxCopTargetProject="..\sdk\$(FxCop45TargetFileName)" BinSuffix="net45" TargetServices="$(ServiceList)"/>
-
-        <!-- Compile custom FxCop rules -->
-        <MSBuild Projects="..\buildtools\CustomFxCopRules\CustomFxCopRules.sln"
-            Targets="Clean;Build"
-            Properties="Configuration=Release" />
-
-        <!-- Run FxCop -->
-        <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop35TargetFileName) /o:..\fxcop-report-3.5.xml /s"/>
-        <Exec Command="$(fxcopcmd) /c /p:..\sdk\$(FxCop45TargetFileName) /o:..\fxcop-report-4.5.xml /s"/>
-
-        <Error Condition="Exists('..\fxcop-report-3.5.xml') or Exists('..\fxcop-report-4.5.xml')" Text="There are FxCop violations!" />
-    </Target>
     <Target Name="build-roslyn-anlyzer-test-and-run" DependsOnTargets="">
         <Exec Command="dotnet build -c $(Configuration) --no-incremental CustomRoslynAnalyzers.Test.csproj"
             WorkingDirectory="..\buildtools\CustomRoslynAnalyzers\CustomRoslynAnalyzers.Test"/>
