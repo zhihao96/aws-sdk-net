@@ -14,7 +14,7 @@
  */
 
 /*
- * Do not modify this file. This file is generated from the sagemaker-2017-07-24.normal.json service model.
+ * Do not modify this file. This file is generated from the appstream-2016-12-01.normal.json service model.
  */
 using System;
 using System.Collections.Generic;
@@ -24,26 +24,26 @@ using System.Net;
 using System.Text;
 using System.Xml.Serialization;
 
-using Amazon.SageMaker.Model;
+using Amazon.AppStream.Model;
 using Amazon.Runtime;
 using Amazon.Runtime.Internal;
 using Amazon.Runtime.Internal.Transform;
 using Amazon.Runtime.Internal.Util;
 using ThirdParty.Json.LitJson;
 
-namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
+namespace Amazon.AppStream.Model.Internal.MarshallTransformations
 {
     /// <summary>
-    /// Response Unmarshaller for StoppingCondition Object
+    /// Response Unmarshaller for AccessEndpoint Object
     /// </summary>  
-    public class StoppingConditionUnmarshaller : IUnmarshaller<StoppingCondition, XmlUnmarshallerContext>, IUnmarshaller<StoppingCondition, JsonUnmarshallerContext>
+    public class AccessEndpointUnmarshaller : IUnmarshaller<AccessEndpoint, XmlUnmarshallerContext>, IUnmarshaller<AccessEndpoint, JsonUnmarshallerContext>
     {
         /// <summary>
         /// Unmarshaller the response from the service to the response class.
         /// </summary>  
         /// <param name="context"></param>
         /// <returns></returns>
-        StoppingCondition IUnmarshaller<StoppingCondition, XmlUnmarshallerContext>.Unmarshall(XmlUnmarshallerContext context)
+        AccessEndpoint IUnmarshaller<AccessEndpoint, XmlUnmarshallerContext>.Unmarshall(XmlUnmarshallerContext context)
         {
             throw new NotImplementedException();
         }
@@ -53,27 +53,27 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
         /// </summary>  
         /// <param name="context"></param>
         /// <returns></returns>
-        public StoppingCondition Unmarshall(JsonUnmarshallerContext context)
+        public AccessEndpoint Unmarshall(JsonUnmarshallerContext context)
         {
             context.Read();
             if (context.CurrentTokenType == JsonToken.Null) 
                 return null;
 
-            StoppingCondition unmarshalledObject = new StoppingCondition();
+            AccessEndpoint unmarshalledObject = new AccessEndpoint();
         
             int targetDepth = context.CurrentDepth;
             while (context.ReadAtDepth(targetDepth))
             {
-                if (context.TestExpression("MaxRuntimeInSeconds", targetDepth))
+                if (context.TestExpression("EndpointType", targetDepth))
                 {
-                    var unmarshaller = IntUnmarshaller.Instance;
-                    unmarshalledObject.MaxRuntimeInSeconds = unmarshaller.Unmarshall(context);
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    unmarshalledObject.EndpointType = unmarshaller.Unmarshall(context);
                     continue;
                 }
-                if (context.TestExpression("MaxWaitTimeInSeconds", targetDepth))
+                if (context.TestExpression("VpceId", targetDepth))
                 {
-                    var unmarshaller = IntUnmarshaller.Instance;
-                    unmarshalledObject.MaxWaitTimeInSeconds = unmarshaller.Unmarshall(context);
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    unmarshalledObject.VpceId = unmarshaller.Unmarshall(context);
                     continue;
                 }
             }
@@ -82,12 +82,12 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
         }
 
 
-        private static StoppingConditionUnmarshaller _instance = new StoppingConditionUnmarshaller();        
+        private static AccessEndpointUnmarshaller _instance = new AccessEndpointUnmarshaller();        
 
         /// <summary>
         /// Gets the singleton.
         /// </summary>  
-        public static StoppingConditionUnmarshaller Instance
+        public static AccessEndpointUnmarshaller Instance
         {
             get
             {

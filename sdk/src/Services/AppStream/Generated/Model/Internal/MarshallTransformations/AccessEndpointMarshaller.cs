@@ -14,7 +14,7 @@
  */
 
 /*
- * Do not modify this file. This file is generated from the sagemaker-2017-07-24.normal.json service model.
+ * Do not modify this file. This file is generated from the appstream-2016-12-01.normal.json service model.
  */
 using System;
 using System.Collections.Generic;
@@ -23,19 +23,19 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
-using Amazon.SageMaker.Model;
+using Amazon.AppStream.Model;
 using Amazon.Runtime;
 using Amazon.Runtime.Internal;
 using Amazon.Runtime.Internal.Transform;
 using Amazon.Runtime.Internal.Util;
 using ThirdParty.Json.LitJson;
 
-namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
+namespace Amazon.AppStream.Model.Internal.MarshallTransformations
 {
     /// <summary>
-    /// StoppingCondition Marshaller
+    /// AccessEndpoint Marshaller
     /// </summary>       
-    public class StoppingConditionMarshaller : IRequestMarshaller<StoppingCondition, JsonMarshallerContext> 
+    public class AccessEndpointMarshaller : IRequestMarshaller<AccessEndpoint, JsonMarshallerContext> 
     {
         /// <summary>
         /// Unmarshaller the response from the service to the response class.
@@ -43,18 +43,18 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
         /// <param name="requestObject"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public void Marshall(StoppingCondition requestObject, JsonMarshallerContext context)
+        public void Marshall(AccessEndpoint requestObject, JsonMarshallerContext context)
         {
-            if(requestObject.IsSetMaxRuntimeInSeconds())
+            if(requestObject.IsSetEndpointType())
             {
-                context.Writer.WritePropertyName("MaxRuntimeInSeconds");
-                context.Writer.Write(requestObject.MaxRuntimeInSeconds);
+                context.Writer.WritePropertyName("EndpointType");
+                context.Writer.Write(requestObject.EndpointType);
             }
 
-            if(requestObject.IsSetMaxWaitTimeInSeconds())
+            if(requestObject.IsSetVpceId())
             {
-                context.Writer.WritePropertyName("MaxWaitTimeInSeconds");
-                context.Writer.Write(requestObject.MaxWaitTimeInSeconds);
+                context.Writer.WritePropertyName("VpceId");
+                context.Writer.Write(requestObject.VpceId);
             }
 
         }
@@ -62,7 +62,7 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
         /// <summary>
         /// Singleton Marshaller.
         /// </summary>  
-        public readonly static StoppingConditionMarshaller Instance = new StoppingConditionMarshaller();
+        public readonly static AccessEndpointMarshaller Instance = new AccessEndpointMarshaller();
 
     }
 }
